@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Pesquisa de Satisfação - Farmácia Tem</title>
+<title>Pesquisa - Farmácia Tem</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -10,116 +10,96 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
-/* FUNDO COM LOGO */
+/* REMOVE QUALQUER VERDE */
 body {
+  margin: 0;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  background: black; /* fundo base */
   position: relative;
   overflow: hidden;
-  background: #000;
 }
 
-/* LOGO COMO FUNDO */
+/* LOGO COMO FUNDO TOTAL */
 body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('logo.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
+  background: url("logo.jpg") no-repeat center;
   background-size: cover;
   filter: blur(15px);
   transform: scale(1.2);
-  opacity: 0.4;
-  z-index: 0;
-}
-
-/* CONTAINER */
-.container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 420px;
+  opacity: 0.5;
 }
 
 /* CARD */
-.card {
-  background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(12px);
-  padding: 25px;
-  border-radius: 18px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+.container {
+  position: relative;
+  z-index: 1;
 }
 
-/* TEXTO */
-.card h2 {
+.card {
+  width: 350px;
+  background: rgba(255,255,255,0.9);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* TEXTOS */
+h2 {
   text-align: center;
-  color: #2e7d32;
   margin-bottom: 10px;
 }
 
-.card p {
+p {
   text-align: center;
-  color: #555;
   margin-bottom: 20px;
+  color: #444;
 }
 
 /* INPUTS */
 label {
-  font-weight: 600;
-  margin-top: 12px;
+  font-weight: bold;
   display: block;
-  color: #333;
+  margin-top: 10px;
 }
 
 input, select, textarea {
   width: 100%;
-  margin-top: 6px;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  font-size: 15px;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: #2e7d32;
-  outline: none;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
 /* BOTÃO */
 button {
   width: 100%;
   margin-top: 20px;
-  padding: 14px;
-  background: linear-gradient(135deg, #2e7d32, #43a047);
+  padding: 12px;
+  background: #222; /* sem verde */
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 button:hover {
-  transform: scale(1.05);
+  background: #000;
 }
 
 /* MENSAGEM */
 .success {
   display: none;
   text-align: center;
-  color: #2e7d32;
-  font-weight: bold;
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 10px;
-  background: #e8f5e9;
+  margin-top: 15px;
+  color: green;
 }
 </style>
 </head>
@@ -127,10 +107,9 @@ button:hover {
 <body>
 
 <div class="container">
-
   <div class="card">
     <h2>💊 Sua opinião importa</h2>
-    <p>Farmácia Tem: Ajude-nos a melhorar</p>
+    <p>Farmácia Tem</p>
 
     <form id="form">
 
@@ -151,9 +130,9 @@ button:hover {
       </select>
 
       <label>O que você procurava?</label>
-      <input type="text" placeholder="Ex: medicamentos, vitaminas...">
+      <input type="text">
 
-      <label>Voltaria a comprar conosco?</label>
+      <label>Voltaria a comprar?</label>
       <select required>
         <option value="">Selecione</option>
         <option>Sim</option>
@@ -162,18 +141,14 @@ button:hover {
       </select>
 
       <label>Sugestões</label>
-      <textarea rows="3" placeholder="Deixe sua opinião..."></textarea>
+      <textarea></textarea>
 
-      <button type="submit">Enviar avaliação</button>
+      <button type="submit">Enviar</button>
 
     </form>
 
-    <div id="msg" class="success">
-      ✅ Obrigado pela sua resposta!
-    </div>
-
+    <div id="msg" class="success">Obrigado!</div>
   </div>
-
 </div>
 
 <script>

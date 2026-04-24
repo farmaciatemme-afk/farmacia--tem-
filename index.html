@@ -33,23 +33,25 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* LOGO DESFOCADO NO FUNDO */
+/* LOGO DESFOCADO NO FUNDO (CORRIGIDO) */
 body::before {
   content: "";
   position: absolute;
-  width: 500px;
-  height: 500px;
-  background: url('logo.jpg') no-repeat center;
-  background-size: contain;
+  inset: 0;
+  background-image: url('logo.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 350px;
   opacity: 0.12;
-  filter: blur(10px);
-  animation: floatLogo 6s ease-in-out infinite;
+  filter: blur(6px);
+  animation: floatLogo 8s ease-in-out infinite;
+  z-index: 0;
 }
 
-/* MOVIMENTO DO LOGO */
+/* MOVIMENTO SUAVE DO LOGO */
 @keyframes floatLogo {
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-15px); }
   100% { transform: translateY(0px); }
 }
 

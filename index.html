@@ -13,51 +13,77 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+/* FUNDO ANIMADO */
 body {
-  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(270deg, #e8f5e9, #c8e6c9, #a5d6a7);
+  background-size: 600% 600%;
+  animation: gradientMove 15s ease infinite;
 }
 
-/* Container */
+/* ANIMAÇÃO DO FUNDO */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* LOGO DESFOCADO NO FUNDO */
+body::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: url('logo.jpg') no-repeat center;
+  background-size: contain;
+  opacity: 0.12;
+  filter: blur(10px);
+  animation: floatLogo 6s ease-in-out infinite;
+}
+
+/* MOVIMENTO DO LOGO */
+@keyframes floatLogo {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+/* CONTAINER */
 .container {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 420px;
 }
 
-/* Topo */
-.header {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.header img {
-  width: 100px;
-  margin-bottom: 10px;
-}
-
-.header h1 {
-  font-size: 22px;
-  color: #2e7d32;
-}
-
-/* Card */
+/* CARD */
 .card {
-  background: #fff;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
   padding: 25px;
   border-radius: 18px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+/* TEXTO */
+.card h2 {
+  text-align: center;
+  color: #2e7d32;
+  margin-bottom: 10px;
 }
 
 .card p {
   text-align: center;
-  color: #666;
+  color: #555;
   margin-bottom: 20px;
 }
 
-/* Inputs */
+/* INPUTS */
 label {
   font-weight: 600;
   margin-top: 12px;
@@ -72,6 +98,7 @@ input, select, textarea {
   border-radius: 10px;
   border: 1px solid #ddd;
   font-size: 15px;
+  transition: 0.2s;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -80,7 +107,7 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 5px rgba(46,125,50,0.2);
 }
 
-/* Botão */
+/* BOTÃO */
 button {
   width: 100%;
   margin-top: 20px;
@@ -92,13 +119,15 @@ button {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* Mensagem */
+/* MENSAGEM */
 .success {
   display: none;
   text-align: center;
@@ -116,14 +145,9 @@ button:hover {
 
 <div class="container">
 
-  <div class="header">
-    <!-- IMPORTANTE: nome igual ao GitHub -->
-    <img src="logo.jpg" alt="Logo Farmácia Tem">
-    <h1>Farmácia Tem</h1>
-  </div>
-
   <div class="card">
-    <p>💊 Sua opinião é muito importante para nós</p>
+    <h2>💊 Sua opinião importa</h2>
+    <p>Farmácia Tem: Ajude-nos a melhorar</p>
 
     <form id="form">
 

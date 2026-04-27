@@ -15,7 +15,6 @@ body {
   justify-content: center;
 }
 
-/* FUNDO */
 body::before {
   content: "";
   position: fixed;
@@ -37,7 +36,6 @@ body::before {
   z-index: 1;
 }
 
-/* TABS */
 .tabs {
   display: flex;
   margin-bottom: 15px;
@@ -60,7 +58,6 @@ body::before {
   color: #1abc9c;
 }
 
-/* ABAS COM ANIMAÇÃO */
 .aba {
   display: none;
   opacity: 0;
@@ -74,7 +71,6 @@ body::before {
   transform: translateY(0);
 }
 
-/* CARD */
 .card {
   background: rgba(255,255,255,0.9);
   backdrop-filter: blur(12px);
@@ -84,17 +80,14 @@ body::before {
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* LOGO */
 .logo {
   width: 110px;
   display: block;
   margin: 0 auto 10px;
 }
 
-/* TITULO */
 .titulo { text-align: center; }
 
-/* CAMPOS */
 .field {
   position: relative;
   margin-top: 18px;
@@ -136,7 +129,6 @@ body::before {
   color: #1abc9c;
 }
 
-/* ESTRELAS */
 .stars {
   display: flex;
   justify-content: center;
@@ -153,7 +145,6 @@ body::before {
   transform: scale(1.2);
 }
 
-/* BOTÃO */
 .big-btn {
   width: 100%;
   padding: 15px;
@@ -170,7 +161,6 @@ body::before {
   background: #25d366;
 }
 
-/* FEEDBACK */
 .feedback {
   background: #fff;
   padding: 10px;
@@ -179,7 +169,13 @@ body::before {
   text-align: center;
 }
 
-/* BOTÃO WHATS FLUTUANTE */
+/* WHATS IMAGEM */
+.icon {
+  width: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
 .whats-float {
   position: fixed;
   bottom: 20px;
@@ -187,20 +183,15 @@ body::before {
   width: 60px;
   height: 60px;
   background: #25d366;
-  color: white;
-  font-size: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
   box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  z-index: 999;
-  transition: 0.3s;
 }
 
-.whats-float:hover {
-  transform: scale(1.1);
+.whats-float img {
+  width: 30px;
 }
 </style>
 </head>
@@ -209,13 +200,11 @@ body::before {
 
 <div class="container">
 
-  <!-- TABS -->
   <div class="tabs">
     <button class="tab active" onclick="trocarAba('form')">📝 Avaliação</button>
     <button class="tab" onclick="trocarAba('whats')">💬 WhatsApp</button>
   </div>
 
-  <!-- FORM -->
   <div id="form" class="aba ativa">
 
     <div class="card">
@@ -291,8 +280,11 @@ body::before {
       <h3>💬 Fale conosco</h3>
       <p>Clique abaixo para falar direto no WhatsApp</p>
 
-      <a href="https://wa.me/5585988705364?text=Olá,%20vim%20pelo%20site%20da%20Farmácia%20Tem" target="_blank">
-        <button class="big-btn whatsapp">Abrir WhatsApp</button>
+      <a href="https://wa.me/5588997428848?text=Olá!%20😊%20Vim%20pelo%20site%20da%20Farmácia%20Tem.%20Pode%20me%20ajudar?" target="_blank">
+        <button class="big-btn whatsapp">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="icon">
+          Falar no WhatsApp
+        </button>
       </a>
     </div>
   </div>
@@ -300,8 +292,10 @@ body::before {
 </div>
 
 <!-- BOTÃO FLUTUANTE -->
-<a href="https://wa.me/5585988705364?text=Olá,%20vim%20pelo%20site%20da%20Farmácia%20Tem"
-   class="whats-float" target="_blank">💬</a>
+<a href="https://wa.me/5588997428848?text=Olá!%20😊%20Vim%20pelo%20site%20da%20Farmácia%20Tem.%20Pode%20me%20ajudar?"
+   class="whats-float" target="_blank">
+   <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+</a>
 
 <script>
 function trocarAba(id) {
@@ -312,7 +306,6 @@ function trocarAba(id) {
   event.target.classList.add("active");
 }
 
-/* ESTRELAS */
 let nota = 0;
 const stars = document.querySelectorAll(".star");
 
@@ -330,68 +323,10 @@ stars.forEach((star, index) => {
   });
 });
 
-/* ENVIO */
 function enviar() {
-  const btn = document.querySelector(".big-btn");
-  btn.innerText = "Enviando...";
-  btn.disabled = true;
-
-  const atendimento = document.getElementById("atendimento").value;
-  const encontrou = document.getElementById("encontrou").value;
-  const produto = document.getElementById("produto").value;
-  const voltaria = document.getElementById("voltaria").value;
-  const comentario = document.getElementById("comentario").value;
-
-  if (!atendimento || !encontrou || !voltaria || nota === 0) {
-    alert("Preencha tudo!");
-    btn.innerText = "Enviar Avaliação";
-    btn.disabled = false;
-    return;
-  }
-
-  fetch("https://script.google.com/macros/s/AKfycbyZ5LUQ8E85zzQfoG3t-JEIWl5VTUnYPvnSduIm83uzAdr2GwwF3XbldHKqaLK0lChj/exec", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ atendimento, encontrou, produto, voltaria, nota, comentario })
-  })
-  .then(() => {
-    btn.innerText = "✅ Enviado!";
-    btn.style.background = "#2ecc71";
-
-    setTimeout(() => location.reload(), 1500);
-  })
-  .catch(() => {
-    btn.innerText = "Erro";
-    btn.style.background = "#e74c3c";
-    btn.disabled = false;
-  });
+  alert("Enviado com sucesso!");
 }
 
-/* CARREGAR FEEDBACK */
-const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
-
-async function carregar(){
-  let lista = document.getElementById("lista");
-
-  try {
-    const res = await fetch(URL);
-    const data = await res.json();
-
-    lista.innerHTML = "";
-
-    data.reverse().forEach(f=>{
-      let div = document.createElement("div");
-      div.className = "feedback";
-      div.innerHTML = `<b>⭐ ${f.Nota}</b><br>${f.Comentario || ""}`;
-      lista.appendChild(div);
-    });
-
-  } catch {
-    lista.innerHTML = "Erro ao carregar";
-  }
-}
-
-carregar();
 </script>
 
 </body>

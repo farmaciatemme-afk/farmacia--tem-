@@ -6,9 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -17,7 +15,7 @@ body {
   justify-content: center;
 }
 
-/* FUNDO COM LOGO DESFOCADO */
+/* FUNDO */
 body::before {
   content: "";
   position: fixed;
@@ -39,20 +37,51 @@ body::before {
   z-index: 1;
 }
 
-/* CARD PREMIUM */
+/* TABS */
+.tabs {
+  display: flex;
+  margin-bottom: 15px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.tab.active {
+  background: white;
+  color: #1abc9c;
+}
+
+/* ABAS COM ANIMAÇÃO */
+.aba {
+  display: none;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.3s ease;
+}
+
+.aba.ativa {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CARD */
 .card {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.9);
   backdrop-filter: blur(12px);
   border-radius: 20px;
   padding: 22px;
   margin-bottom: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  animation: fadeUp 0.5s ease;
-}
-
-@keyframes fadeUp {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
 }
 
 /* LOGO */
@@ -60,26 +89,10 @@ body::before {
   width: 110px;
   display: block;
   margin: 0 auto 10px;
-  border: none;
-  background: transparent;
-  box-shadow: none;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
 }
 
-/* TÍTULO */
-.titulo {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.titulo h2 {
-  margin: 5px 0;
-}
-
-.titulo p {
-  margin: 0;
-  color: #555;
-}
+/* TITULO */
+.titulo { text-align: center; }
 
 /* CAMPOS */
 .field {
@@ -94,30 +107,23 @@ body::before {
   padding: 16px 12px 8px;
   border-radius: 12px;
   border: 1px solid #ddd;
-  font-size: 15px;
-  transition: 0.3s;
-  background: white;
 }
 
-/* FOCO */
-.field input:focus,
-.field textarea:focus,
-.field select:focus {
-  outline: none;
-  border-color: #1abc9c;
-  box-shadow: 0 0 0 3px rgba(26,188,156,0.2);
-  transform: scale(1.01);
-}
-
-/* LABEL FLUTUANTE */
 .field label {
   position: absolute;
   top: 12px;
   left: 12px;
   font-size: 13px;
   color: #777;
-  pointer-events: none;
   transition: 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: none;
+  border-color: #1abc9c;
+  box-shadow: 0 0 0 3px rgba(26,188,156,0.2);
 }
 
 .field input:focus + label,
@@ -125,9 +131,7 @@ body::before {
 .field textarea:focus + label,
 .field textarea:not(:placeholder-shown) + label {
   top: -8px;
-  left: 10px;
   background: white;
-  padding: 0 5px;
   font-size: 11px;
   color: #1abc9c;
 }
@@ -137,39 +141,29 @@ body::before {
   display: flex;
   justify-content: center;
   font-size: 30px;
-  margin: 15px 0;
 }
 
 .star {
   color: #ccc;
   cursor: pointer;
+  transition: 0.2s;
 }
 
-.star.active {
-  color: gold;
-  text-shadow: 0 0 5px rgba(255,215,0,0.7);
+.star:hover {
+  transform: scale(1.2);
 }
 
-/* BOTÕES */
+/* BOTÃO */
 .big-btn {
   width: 100%;
   padding: 15px;
   margin-top: 15px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, #ff4d4d, #e53935);
+  background: #e53935;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.25s;
-}
-
-.big-btn:hover {
-  transform: scale(1.05);
-}
-
-.big-btn:active {
-  transform: scale(0.97);
 }
 
 .whatsapp {
@@ -178,11 +172,35 @@ body::before {
 
 /* FEEDBACK */
 .feedback {
-  background: rgba(255,255,255,0.6);
-  padding: 12px;
-  border-radius: 12px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
   margin-top: 10px;
   text-align: center;
+}
+
+/* BOTÃO WHATS FLUTUANTE */
+.whats-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: #25d366;
+  color: white;
+  font-size: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  z-index: 999;
+  transition: 0.3s;
+}
+
+.whats-float:hover {
+  transform: scale(1.1);
 }
 </style>
 </head>
@@ -191,91 +209,133 @@ body::before {
 
 <div class="container">
 
-  <div class="card">
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="trocarAba('form')">📝 Avaliação</button>
+    <button class="tab" onclick="trocarAba('whats')">💬 WhatsApp</button>
+  </div>
 
-    <img src="logo.png" class="logo">
+  <!-- FORM -->
+  <div id="form" class="aba ativa">
 
-    <div class="titulo">
-      <h2>💊 Farmácia Tem</h2>
-      <p>Avalie nosso atendimento</p>
+    <div class="card">
+      <img src="logo.png" class="logo">
+
+      <div class="titulo">
+        <h2>💊 Farmácia Tem</h2>
+        <p>Avalie nosso atendimento</p>
+      </div>
+
+      <div class="field">
+        <select id="atendimento">
+          <option value=""></option>
+          <option>Excelente</option>
+          <option>Bom</option>
+          <option>Regular</option>
+          <option>Ruim</option>
+        </select>
+        <label>Como foi o atendimento?</label>
+      </div>
+
+      <div class="field">
+        <select id="encontrou">
+          <option value=""></option>
+          <option>Sim</option>
+          <option>Não</option>
+        </select>
+        <label>Encontrou o que precisava?</label>
+      </div>
+
+      <div class="field">
+        <input type="text" id="produto" placeholder=" ">
+        <label>O que você procurava?</label>
+      </div>
+
+      <div class="field">
+        <select id="voltaria">
+          <option value=""></option>
+          <option>Sim</option>
+          <option>Talvez</option>
+          <option>Não</option>
+        </select>
+        <label>Voltaria a comprar?</label>
+      </div>
+
+      <label style="text-align:center;">Avaliação</label>
+      <div class="stars">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+      </div>
+
+      <div class="field">
+        <textarea id="comentario" placeholder=" "></textarea>
+        <label>Sugestões</label>
+      </div>
+
+      <button class="big-btn" onclick="enviar()">Enviar Avaliação</button>
     </div>
 
-    <div class="field">
-      <select id="atendimento">
-        <option value=""></option>
-        <option>Excelente</option>
-        <option>Bom</option>
-        <option>Regular</option>
-        <option>Ruim</option>
-      </select>
-      <label>Como foi o atendimento?</label>
+    <div class="card">
+      <h3 style="text-align:center;">💬 Feedback</h3>
+      <div id="lista">Carregando avaliações...</div>
     </div>
-
-    <div class="field">
-      <select id="encontrou">
-        <option value=""></option>
-        <option>Sim</option>
-        <option>Não</option>
-      </select>
-      <label>Encontrou o que precisava?</label>
-    </div>
-
-    <div class="field">
-      <input type="text" id="produto" placeholder=" ">
-      <label>O que você procurava?</label>
-    </div>
-
-    <div class="field">
-      <select id="voltaria">
-        <option value=""></option>
-        <option>Sim</option>
-        <option>Talvez</option>
-        <option>Não</option>
-      </select>
-      <label>Voltaria a comprar?</label>
-    </div>
-
-    <label style="text-align:center;">Avaliação</label>
-    <div class="stars">
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">★</span>
-    </div>
-
-    <div class="field">
-      <textarea id="comentario" placeholder=" "></textarea>
-      <label>Sugestões</label>
-    </div>
-
-    <button class="big-btn" onclick="enviar()">Enviar Avaliação</button>
-
-    <a href="https://wa.me/5585988705364" target="_blank">
-      <button class="big-btn whatsapp">Falar no WhatsApp</button>
-    </a>
 
   </div>
 
-  <div class="card">
-    <h3 style="text-align:center;">💬 Feedback</h3>
-    <div id="lista"></div>
+  <!-- WHATS -->
+  <div id="whats" class="aba">
+    <div class="card" style="text-align:center;">
+      <h3>💬 Fale conosco</h3>
+      <p>Clique abaixo para falar direto no WhatsApp</p>
+
+      <a href="https://wa.me/5585988705364?text=Olá,%20vim%20pelo%20site%20da%20Farmácia%20Tem" target="_blank">
+        <button class="big-btn whatsapp">Abrir WhatsApp</button>
+      </a>
+    </div>
   </div>
 
 </div>
 
+<!-- BOTÃO FLUTUANTE -->
+<a href="https://wa.me/5585988705364?text=Olá,%20vim%20pelo%20site%20da%20Farmácia%20Tem"
+   class="whats-float" target="_blank">💬</a>
+
 <script>
+function trocarAba(id) {
+  document.querySelectorAll(".aba").forEach(a => a.classList.remove("ativa"));
+  document.getElementById(id).classList.add("ativa");
+
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  event.target.classList.add("active");
+}
+
+/* ESTRELAS */
 let nota = 0;
 const stars = document.querySelectorAll(".star");
 
 stars.forEach((star, index) => {
-  star.onclick = () => {
+  star.addEventListener("mouseover", () => {
+    stars.forEach((s, i) => s.style.color = i <= index ? "gold" : "#ccc");
+  });
+
+  star.addEventListener("mouseout", () => {
+    stars.forEach((s, i) => s.style.color = i < nota ? "gold" : "#ccc");
+  });
+
+  star.addEventListener("click", () => {
     nota = index + 1;
-    stars.forEach((s,i)=> s.classList.toggle("active", i<nota));
-  };
+  });
 });
 
+/* ENVIO */
 function enviar() {
+  const btn = document.querySelector(".big-btn");
+  btn.innerText = "Enviando...";
+  btn.disabled = true;
+
   const atendimento = document.getElementById("atendimento").value;
   const encontrou = document.getElementById("encontrou").value;
   const produto = document.getElementById("produto").value;
@@ -284,6 +344,8 @@ function enviar() {
 
   if (!atendimento || !encontrou || !voltaria || nota === 0) {
     alert("Preencha tudo!");
+    btn.innerText = "Enviar Avaliação";
+    btn.disabled = false;
     return;
   }
 
@@ -293,26 +355,40 @@ function enviar() {
     body: JSON.stringify({ atendimento, encontrou, produto, voltaria, nota, comentario })
   })
   .then(() => {
-    alert("Obrigado!");
-    location.reload();
+    btn.innerText = "✅ Enviado!";
+    btn.style.background = "#2ecc71";
+
+    setTimeout(() => location.reload(), 1500);
+  })
+  .catch(() => {
+    btn.innerText = "Erro";
+    btn.style.background = "#e74c3c";
+    btn.disabled = false;
   });
 }
 
+/* CARREGAR FEEDBACK */
 const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
 async function carregar(){
-  const res = await fetch(URL);
-  const data = await res.json();
-
   let lista = document.getElementById("lista");
-  lista.innerHTML = "";
 
-  data.reverse().forEach(f=>{
-    let div = document.createElement("div");
-    div.className = "feedback";
-    div.innerHTML = `<b>⭐ ${f.Nota}</b><br>${f.Comentario || ""}`;
-    lista.appendChild(div);
-  });
+  try {
+    const res = await fetch(URL);
+    const data = await res.json();
+
+    lista.innerHTML = "";
+
+    data.reverse().forEach(f=>{
+      let div = document.createElement("div");
+      div.className = "feedback";
+      div.innerHTML = `<b>⭐ ${f.Nota}</b><br>${f.Comentario || ""}`;
+      lista.appendChild(div);
+    });
+
+  } catch {
+    lista.innerHTML = "Erro ao carregar";
+  }
 }
 
 carregar();

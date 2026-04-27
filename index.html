@@ -33,7 +33,7 @@ body::before {
   width: 100%;
   max-width: 900px;
   padding: 20px;
-  padding-bottom: 120px; /* espaço pro botão */
+  padding-bottom: 120px;
   position: relative;
   z-index: 1;
 }
@@ -77,10 +77,11 @@ body::before {
 
 /* CARD */
 .card {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.95);
   backdrop-filter: blur(12px);
   border-radius: 20px;
-  padding: 22px;
+  padding: 25px;
+  margin-top: 30px;
   margin-bottom: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
@@ -89,52 +90,68 @@ body::before {
 .logo {
   width: 110px;
   display: block;
-  margin: 0 auto 10px;
+  margin: 10px auto;
 }
 
 /* TITULO */
-.titulo { text-align: center; }
+.titulo {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-/* CAMPOS */
+/* CAMPOS ESTILO NUBANK */
 .field {
   position: relative;
-  margin-top: 18px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 500px;
 }
 
 .field input,
 .field textarea,
 .field select {
   width: 100%;
-  padding: 16px 12px 8px;
-  border-radius: 12px;
+  padding: 18px 14px;
+  border-radius: 14px;
   border: 1px solid #ddd;
+  font-size: 15px;
+  background: #fff;
+  outline: none;
+  transition: all 0.25s ease;
 }
 
+/* LABEL DENTRO */
 .field label {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  font-size: 13px;
-  color: #777;
-  transition: 0.2s;
+  left: 14px;
+  top: 16px;
+  color: #999;
+  font-size: 14px;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  background: white;
+  padding: 0 5px;
 }
 
-.field input:focus,
-.field textarea:focus,
-.field select:focus {
-  outline: none;
-  border-color: #1abc9c;
-  box-shadow: 0 0 0 3px rgba(26,188,156,0.2);
-}
-
+/* ANIMAÇÃO */
 .field input:focus + label,
 .field input:not(:placeholder-shown) + label,
 .field textarea:focus + label,
-.field textarea:not(:placeholder-shown) + label {
+.field textarea:not(:placeholder-shown) + label,
+.field select:focus + label,
+.field select:valid + label {
   top: -8px;
-  background: white;
-  font-size: 11px;
+  font-size: 12px;
   color: #1abc9c;
+}
+
+/* FOCO */
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: #1abc9c;
+  box-shadow: 0 0 0 3px rgba(26,188,156,0.15);
+  transform: scale(1.02);
 }
 
 /* ESTRELAS */
@@ -142,6 +159,7 @@ body::before {
   display: flex;
   justify-content: center;
   font-size: 30px;
+  margin-top: 10px;
 }
 
 .star {
@@ -158,7 +176,7 @@ body::before {
 .big-btn {
   width: 100%;
   padding: 15px;
-  margin-top: 15px;
+  margin-top: 20px;
   border: none;
   border-radius: 14px;
   background: #e53935;
@@ -174,17 +192,10 @@ body::before {
 /* FEEDBACK */
 .feedback {
   background: #fff;
-  padding: 10px;
+  padding: 12px;
   border-radius: 10px;
   margin-top: 10px;
   text-align: center;
-}
-
-/* ICON */
-.icon {
-  width: 20px;
-  vertical-align: middle;
-  margin-right: 8px;
 }
 
 /* BOTÃO FLUTUANTE */
@@ -199,19 +210,11 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
   z-index: 999;
 }
 
 .whats-float img {
   width: 30px;
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-  .whats-float {
-    bottom: 100px;
-  }
 }
 </style>
 </head>
@@ -220,7 +223,6 @@ body::before {
 
 <div class="container">
 
-  <!-- TABS -->
   <div class="tabs">
     <button class="tab active" onclick="trocarAba('form')">📝 Avaliação</button>
     <button class="tab" onclick="trocarAba('whats')">💬 WhatsApp</button>
@@ -238,8 +240,8 @@ body::before {
       </div>
 
       <div class="field">
-        <select id="atendimento">
-          <option value=""></option>
+        <select id="atendimento" required>
+          <option value="" disabled selected hidden></option>
           <option>Excelente</option>
           <option>Bom</option>
           <option>Regular</option>
@@ -249,8 +251,8 @@ body::before {
       </div>
 
       <div class="field">
-        <select id="encontrou">
-          <option value=""></option>
+        <select id="encontrou" required>
+          <option value="" disabled selected hidden></option>
           <option>Sim</option>
           <option>Não</option>
         </select>
@@ -258,13 +260,13 @@ body::before {
       </div>
 
       <div class="field">
-        <input type="text" id="produto" placeholder=" ">
+        <input type="text" id="produto" placeholder=" " required>
         <label>O que você procurava?</label>
       </div>
 
       <div class="field">
-        <select id="voltaria">
-          <option value=""></option>
+        <select id="voltaria" required>
+          <option value="" disabled selected hidden></option>
           <option>Sim</option>
           <option>Talvez</option>
           <option>Não</option>
@@ -303,10 +305,7 @@ body::before {
       <p>Clique abaixo para falar direto no WhatsApp</p>
 
       <a href="https://wa.me/5588997428848?text=Olá!%20😊%20Vim%20pelo%20site%20da%20Farmácia%20Tem.%20Pode%20me%20ajudar?" target="_blank">
-        <button class="big-btn whatsapp">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="icon">
-          Falar no WhatsApp
-        </button>
+        <button class="big-btn whatsapp">Falar no WhatsApp</button>
       </a>
     </div>
   </div>
@@ -316,7 +315,7 @@ body::before {
 <!-- BOTÃO FLUTUANTE -->
 <a href="https://wa.me/5588997428848?text=Olá!%20😊%20Vim%20pelo%20site%20da%20Farmácia%20Tem.%20Pode%20me%20ajudar?"
    class="whats-float" target="_blank">
-   <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+   <img src="whatsapp.png">
 </a>
 
 <script>
@@ -332,21 +331,14 @@ let nota = 0;
 const stars = document.querySelectorAll(".star");
 
 stars.forEach((star, index) => {
-  star.addEventListener("mouseover", () => {
-    stars.forEach((s, i) => s.style.color = i <= index ? "gold" : "#ccc");
-  });
-
-  star.addEventListener("mouseout", () => {
-    stars.forEach((s, i) => s.style.color = i < nota ? "gold" : "#ccc");
-  });
-
-  star.addEventListener("click", () => {
+  star.onclick = () => {
     nota = index + 1;
-  });
+    stars.forEach((s,i)=> s.style.color = i < nota ? "gold" : "#ccc");
+  };
 });
 
 function enviar() {
-  alert("Enviado com sucesso!");
+  alert("Avaliação enviada!");
 }
 </script>
 

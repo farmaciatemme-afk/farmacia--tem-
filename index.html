@@ -15,7 +15,6 @@ body {
   justify-content: center;
 }
 
-/* FUNDO */
 body::before {
   content: "";
   position: fixed;
@@ -38,7 +37,6 @@ body::before {
   z-index: 1;
 }
 
-/* TABS */
 .tabs {
   display: flex;
   margin-bottom: 15px;
@@ -61,12 +59,11 @@ body::before {
   color: #1abc9c;
 }
 
-/* ABAS */
 .aba {
   display: none;
   opacity: 0;
   transform: translateY(15px);
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .aba.ativa {
@@ -75,35 +72,27 @@ body::before {
   transform: translateY(0);
 }
 
-/* CARD */
 .card {
   background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
   border-radius: 20px;
   padding: 25px;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-top: 25px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* LOGO */
 .logo {
   width: 110px;
   display: block;
   margin: 10px auto;
 }
 
-/* TITULO */
 .titulo {
   text-align: center;
-  margin-bottom: 20px;
 }
 
-/* CAMPOS */
 .field {
   position: relative;
-  margin: 20px auto;
-  width: 100%;
+  margin: 18px auto;
   max-width: 500px;
 }
 
@@ -111,23 +100,17 @@ body::before {
 .field textarea,
 .field select {
   width: 100%;
-  padding: 18px 14px;
+  padding: 16px;
   border-radius: 14px;
   border: 1px solid #ddd;
-  font-size: 15px;
-  background: #fff;
-  outline: none;
-  transition: all 0.25s ease;
 }
 
 .field label {
   position: absolute;
-  left: 14px;
-  top: 16px;
+  left: 12px;
+  top: 14px;
   color: #999;
-  font-size: 14px;
-  pointer-events: none;
-  transition: all 0.25s ease;
+  transition: 0.2s;
   background: white;
   padding: 0 5px;
 }
@@ -143,56 +126,32 @@ body::before {
   color: #1abc9c;
 }
 
-.field input:focus,
-.field textarea:focus,
-.field select:focus {
-  border-color: #1abc9c;
-  box-shadow: 0 0 0 3px rgba(26,188,156,0.15);
-}
-
-/* ESTRELAS */
 .stars {
-  display: flex;
-  justify-content: center;
-  font-size: 30px;
+  text-align: center;
+  font-size: 28px;
 }
 
-.star {
-  color: #ccc;
-  cursor: pointer;
-}
+.star { cursor: pointer; color: #ccc; }
 
-.star:hover {
-  transform: scale(1.2);
-}
-
-/* BOTÕES */
 .big-btn {
   width: 100%;
   padding: 15px;
-  margin-top: 20px;
   border: none;
   border-radius: 14px;
   background: #e53935;
   color: white;
-  font-weight: bold;
-  cursor: pointer;
+  margin-top: 20px;
 }
 
-.whatsapp {
-  background: #25d366;
-}
+.whatsapp { background: #25d366; }
 
-/* FEEDBACK */
 .feedback {
   background: #fff;
-  padding: 15px;
-  border-radius: 14px;
-  margin-top: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 
-/* BOTÃO FLUTUANTE */
 .whats-float {
   position: fixed;
   bottom: 80px;
@@ -202,13 +161,11 @@ body::before {
   background: #25d366;
   border-radius: 50%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.whats-float img {
-  width: 30px;
-}
+.whats-float img { width: 30px; }
 </style>
 </head>
 
@@ -216,157 +173,132 @@ body::before {
 
 <div class="container">
 
-  <div class="tabs">
-    <button class="tab active" onclick="trocarAba('form')">📝 Avaliação</button>
-    <button class="tab" onclick="trocarAba('whats')">💬 WhatsApp</button>
-  </div>
+<div class="tabs">
+  <button class="tab active" onclick="trocarAba('form')">Avaliação</button>
+  <button class="tab" onclick="trocarAba('whats')">WhatsApp</button>
+</div>
 
-  <div id="form" class="aba ativa">
+<div id="form" class="aba ativa">
 
-    <div class="card">
-      <img src="logo.png" class="logo">
+<div class="card">
+<img src="logo.png" class="logo">
 
-      <div class="titulo">
-        <h2>💊 Farmácia Tem</h2>
-        <p>Avalie nosso atendimento</p>
-      </div>
+<div class="titulo">
+<h2>Farmácia Tem</h2>
+<p>Avalie nosso atendimento</p>
+</div>
 
-      <div class="field">
-        <select id="atendimento" required>
-          <option value="" disabled selected hidden></option>
-          <option>Excelente</option>
-          <option>Bom</option>
-          <option>Regular</option>
-          <option>Ruim</option>
-        </select>
-        <label>Como foi o atendimento?</label>
-      </div>
+<div class="field">
+<select id="atendimento" required>
+<option value="" disabled selected></option>
+<option>Excelente</option>
+<option>Bom</option>
+<option>Regular</option>
+<option>Ruim</option>
+</select>
+<label>Atendimento</label>
+</div>
 
-      <div class="field">
-        <select id="encontrou" required>
-          <option value="" disabled selected hidden></option>
-          <option>Sim</option>
-          <option>Não</option>
-        </select>
-        <label>Encontrou o que precisava?</label>
-      </div>
+<div class="field">
+<select id="encontrou" required>
+<option value="" disabled selected></option>
+<option>Sim</option>
+<option>Não</option>
+</select>
+<label>Encontrou?</label>
+</div>
 
-      <div class="field">
-        <input type="text" id="produto" placeholder=" ">
-        <label>O que você procurava?</label>
-      </div>
+<div class="field">
+<input id="produto" placeholder=" ">
+<label>Produto</label>
+</div>
 
-      <div class="field">
-        <select id="voltaria" required>
-          <option value="" disabled selected hidden></option>
-          <option>Sim</option>
-          <option>Talvez</option>
-          <option>Não</option>
-        </select>
-        <label>Voltaria a comprar?</label>
-      </div>
+<div class="field">
+<select id="voltaria" required>
+<option value="" disabled selected></option>
+<option>Sim</option>
+<option>Talvez</option>
+<option>Não</option>
+</select>
+<label>Voltaria?</label>
+</div>
 
-      <label style="text-align:center;">Avaliação</label>
-      <div class="stars">
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-      </div>
+<div class="stars">
+<span class="star">★</span>
+<span class="star">★</span>
+<span class="star">★</span>
+<span class="star">★</span>
+<span class="star">★</span>
+</div>
 
-      <div class="field">
-        <textarea id="comentario" placeholder=" "></textarea>
-        <label>Sugestões</label>
-      </div>
+<div class="field">
+<textarea id="comentario" placeholder=" "></textarea>
+<label>Sugestões</label>
+</div>
 
-      <button class="big-btn" onclick="enviar()">Enviar Avaliação</button>
-    </div>
-
-    <div class="card">
-      <h3 style="text-align:center;">⭐ Avaliações</h3>
-      <div id="lista">Carregando...</div>
-    </div>
-
-  </div>
-
-  <div id="whats" class="aba">
-    <div class="card" style="text-align:center;">
-      <h3>💬 Fale conosco</h3>
-      <a href="https://wa.me/5588997428848?text=Olá!%20Vim%20pelo%20site" target="_blank">
-        <button class="big-btn whatsapp">WhatsApp</button>
-      </a>
-    </div>
-  </div>
+<button class="big-btn" onclick="enviar()">Enviar</button>
 
 </div>
 
-<a href="https://wa.me/5588997428848?text=Olá!" class="whats-float" target="_blank">
-  <img src="whatsapp.png">
+<div class="card">
+<h3>Feedback</h3>
+<div id="lista">Carregando...</div>
+</div>
+
+</div>
+
+<div id="whats" class="aba">
+<div class="card" style="text-align:center;">
+<h3>Fale conosco</h3>
+
+<a href="https://wa.me/5588997428848?text=Olá!%20😊%20Vim%20pelo%20site%20da%20Farmácia%20Tem.%0A%0AGostaria%20de%20saber%20mais%20sobre%20produtos,%20preços%20e%20promoções.%0A%0APode%20me%20ajudar?" target="_blank">
+<button class="big-btn whatsapp">Ir para WhatsApp</button>
+</a>
+
+</div>
+</div>
+
+</div>
+
+<a href="https://wa.me/5588997428848?text=Olá!%20😊%20Vim%20pelo%20site%20da%20Farmácia%20Tem.%0A%0AGostaria%20de%20saber%20mais%20sobre%20produtos,%20preços%20e%20promoções.%0A%0APode%20me%20ajudar?" class="whats-float" target="_blank">
+<img src="whatsapp.png">
 </a>
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZ5LUQ8E85zzQfoG3t-JEIWl5VTUnYPvnSduIm83uzAdr2GwwF3XbldHKqaLK0lChj/exec";
 const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
-function trocarAba(id) {
-  document.querySelectorAll(".aba").forEach(a => a.classList.remove("ativa"));
-  document.getElementById(id).classList.add("ativa");
+function trocarAba(id){
+document.querySelectorAll(".aba").forEach(a=>a.classList.remove("ativa"));
+document.getElementById(id).classList.add("ativa");
 }
 
-let nota = 0;
-const stars = document.querySelectorAll(".star");
-
-stars.forEach((star, index) => {
-  star.onclick = () => {
-    nota = index + 1;
-    stars.forEach((s,i)=> s.style.color = i < nota ? "gold" : "#ccc");
-  };
+let nota=0;
+document.querySelectorAll(".star").forEach((s,i)=>{
+s.onclick=()=>{nota=i+1;document.querySelectorAll(".star").forEach((e,j)=>e.style.color=j<nota?"gold":"#ccc");};
 });
 
-function enviar() {
-  const atendimento = document.getElementById("atendimento").value;
-  const encontrou = document.getElementById("encontrou").value;
-  const produto = document.getElementById("produto").value;
-  const voltaria = document.getElementById("voltaria").value;
-  const comentario = document.getElementById("comentario").value;
-
-  if (!atendimento || !encontrou || !voltaria || nota === 0) {
-    alert("Preencha tudo!");
-    return;
-  }
-
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify({ atendimento, encontrou, produto, voltaria, nota, comentario })
-  })
-  .then(() => {
-    alert("Enviado!");
-    location.reload();
-  });
+function enviar(){
+fetch(SCRIPT_URL,{
+method:"POST",
+body:JSON.stringify({
+atendimento:atendimento.value,
+encontrou:encontrou.value,
+produto:produto.value,
+voltaria:voltaria.value,
+nota,
+comentario:comentario.value
+})
+}).then(()=>{alert("Enviado!");location.reload();});
 }
 
 async function carregar(){
-  let lista = document.getElementById("lista");
-
-  try {
-    const res = await fetch(URL);
-    const data = await res.json();
-
-    lista.innerHTML = "";
-
-    data.reverse().forEach(f=>{
-      let estrelas = "★".repeat(f.Nota) + "☆".repeat(5 - f.Nota);
-
-      let div = document.createElement("div");
-      div.className = "feedback";
-      div.innerHTML = `<div style="color:gold">${estrelas}</div>${f.Comentario}`;
-      lista.appendChild(div);
-    });
-
-  } catch {
-    lista.innerHTML = "Erro ao carregar";
-  }
+let res=await fetch(URL);
+let data=await res.json();
+lista.innerHTML="";
+data.reverse().forEach(f=>{
+lista.innerHTML+=`<div class="feedback">⭐ ${f.Nota}<br>${f.Comentario||""}</div>`;
+});
 }
 
 carregar();

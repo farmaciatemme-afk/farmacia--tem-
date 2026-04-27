@@ -3,32 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <title>Farmácia Tem</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 body {
   margin: 0;
   font-family: Arial;
-  background: #0d0d0d;
-  color: white;
+  background: black;
   display: flex;
   justify-content: center;
 }
 
+/* fundo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("logo.jpg") no-repeat center;
+  background-size: cover;
+  filter: blur(12px);
+  opacity: 0.4;
+}
+
+/* container geral */
 .container {
   width: 100%;
-  max-width: 420px;
+  max-width: 900px;
   padding: 20px;
+  position: relative;
+  z-index: 1;
 }
 
+/* layout desktop */
+@media (min-width: 700px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+/* card */
 .card {
-  background: #1c1c1c;
+  background: rgba(255,255,255,0.95);
   padding: 20px;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-radius: 15px;
 }
 
+/* logo */
+.logo {
+  width: 120px;
+  display: block;
+  margin: 0 auto 10px;
+  border-radius: 15px;
+}
+
+/* título */
 h2, h3 {
   text-align: center;
 }
@@ -36,51 +67,52 @@ h2, h3 {
 /* estrelas */
 .stars {
   display: flex;
-  gap: 5px;
-  font-size: 28px;
-  cursor: pointer;
   justify-content: center;
+  font-size: 35px;
   margin: 10px 0;
 }
 
 .star {
-  color: #555;
+  color: #ccc;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .star.active {
   color: gold;
 }
 
-/* inputs */
-select, textarea {
+/* textarea */
+textarea {
   width: 100%;
-  padding: 10px;
-  margin-top: 10px;
+  padding: 12px;
   border-radius: 10px;
-  border: none;
-  outline: none;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 /* botão */
-button {
+.big-btn {
   width: 100%;
-  padding: 12px;
-  margin-top: 15px;
+  padding: 15px;
+  margin-top: 12px;
   border: none;
   border-radius: 10px;
   background: #007aff;
   color: white;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
 
-button:hover {
+.big-btn:hover {
   background: #005ecb;
 }
 
 /* feedback */
 .feedback {
-  background: #2a2a2a;
+  background: #eee;
   padding: 12px;
   border-radius: 10px;
   margin-top: 10px;
@@ -88,7 +120,7 @@ button:hover {
 
 .media {
   text-align: center;
-  font-size: 18px;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 </style>
@@ -100,35 +132,13 @@ button:hover {
 
   <!-- FORM -->
   <div class="card">
-    <h2>💊 Farmácia Tem</h2>
 
-    <div id="media" class="media">⭐ Média: carregando...</div>
+    <img src="logo.jpg" class="logo">
 
-    <label>Atendimento</label>
-    <select id="atendimento">
-      <option value="">Selecione</option>
-      <option>Excelente</option>
-      <option>Bom</option>
-      <option>Regular</option>
-      <option>Ruim</option>
-    </select>
+    <h2>💊 Avalie nosso atendimento</h2>
 
-    <label>Encontrou o produto?</label>
-    <select id="encontrou">
-      <option value="">Selecione</option>
-      <option>Sim</option>
-      <option>Não</option>
-    </select>
+    <div id="media" class="media">Carregando...</div>
 
-    <label>Voltaria?</label>
-    <select id="voltaria">
-      <option value="">Selecione</option>
-      <option>Sim</option>
-      <option>Talvez</option>
-      <option>Não</option>
-    </select>
-
-    <label>Avaliação</label>
     <div class="stars">
       <span class="star">★</span>
       <span class="star">★</span>
@@ -137,14 +147,14 @@ button:hover {
       <span class="star">★</span>
     </div>
 
-    <textarea id="comentario" placeholder="Comentário..."></textarea>
+    <textarea id="comentario" placeholder="Digite sua opinião..."></textarea>
 
-    <button onclick="enviar()">Enviar</button>
+    <button class="big-btn" onclick="enviar()">Enviar avaliação</button>
   </div>
 
   <!-- FEEDBACK -->
   <div class="card">
-    <h3>💬 Opiniões dos clientes</h3>
+    <h3>💬 Clientes</h3>
     <div id="lista"></div>
   </div>
 
@@ -162,67 +172,52 @@ stars.forEach((star, index) => {
   };
 });
 
-// ENVIO
+// enviar
 function enviar() {
-  const atendimento = document.getElementById("atendimento").value;
-  const encontrou = document.getElementById("encontrou").value;
-  const voltaria = document.getElementById("voltaria").value;
   const comentario = document.getElementById("comentario").value;
 
-  if (!atendimento || !encontrou || !voltaria || nota === 0) {
-    alert("Preencha tudo!");
+  if(nota === 0){
+    alert("Selecione uma avaliação!");
     return;
   }
 
   fetch("https://script.google.com/macros/s/AKfycbyZ5LUQ8E85zzQfoG3t-JEIWl5VTUnYPvnSduIm83uzAdr2GwwF3XbldHKqaLK0lChj/exec", {
     method: "POST",
     body: JSON.stringify({
-      atendimento,
-      encontrou,
-      voltaria,
       nota,
       comentario
     })
   })
   .then(() => {
-    alert("Feedback enviado!");
+    alert("Obrigado!");
     location.reload();
-  })
-  .catch(() => alert("Erro ao enviar"));
+  });
 }
 
-// LINK DA TUA PLANILHA (JSON)
+// JSON da planilha
 const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
 // carregar dados
-async function carregar() {
-  try {
-    const res = await fetch(URL);
-    const data = await res.json();
+async function carregar(){
+  const res = await fetch(URL);
+  const data = await res.json();
 
-    let total = 0;
-    let lista = document.getElementById("lista");
-    lista.innerHTML = "";
+  let total = 0;
+  let lista = document.getElementById("lista");
+  lista.innerHTML = "";
 
-    data.reverse().forEach(f => {
-      total += Number(f.Nota);
+  data.reverse().forEach(f=>{
+    total += Number(f.Nota);
 
-      const div = document.createElement("div");
-      div.className = "feedback";
-      div.innerHTML = `
-        ⭐ ${f.Nota}<br>
-        ${f.Comentario || ""}
-      `;
-      lista.appendChild(div);
-    });
+    let div = document.createElement("div");
+    div.className = "feedback";
+    div.innerHTML = `⭐ ${f.Nota} - ${f.Comentario || ""}`;
+    lista.appendChild(div);
+  });
 
-    let media = total / data.length;
-    document.getElementById("media").innerText =
-      "⭐ Média: " + media.toFixed(1);
-
-  } catch {
-    document.getElementById("media").innerText = "Erro ao carregar";
-  }
+  let media = total / data.length;
+  document.getElementById("media").innerText =
+    "⭐ Média: " + media.toFixed(1);
 }
 
 carregar();

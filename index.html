@@ -13,19 +13,17 @@
   font-family: Arial, sans-serif;
 }
 
-/* REMOVE QUALQUER VERDE */
 body {
   margin: 0;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black; /* fundo base */
+  background: black;
   position: relative;
   overflow: hidden;
 }
 
-/* LOGO COMO FUNDO TOTAL */
 body::before {
   content: "";
   position: absolute;
@@ -37,7 +35,6 @@ body::before {
   opacity: 0.5;
 }
 
-/* CARD */
 .container {
   position: relative;
   z-index: 1;
@@ -51,7 +48,6 @@ body::before {
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-/* TEXTOS */
 h2 {
   text-align: center;
   margin-bottom: 10px;
@@ -63,7 +59,6 @@ p {
   color: #444;
 }
 
-/* INPUTS */
 label {
   font-weight: bold;
   display: block;
@@ -78,12 +73,11 @@ input, select, textarea {
   border: 1px solid #ccc;
 }
 
-/* BOTÃO */
 button {
   width: 100%;
   margin-top: 20px;
   padding: 12px;
-  background: #222; /* sem verde */
+  background: #222;
   color: white;
   border: none;
   border-radius: 8px;
@@ -94,7 +88,23 @@ button:hover {
   background: #000;
 }
 
-/* MENSAGEM */
+/* estrelas */
+.stars {
+  display: flex;
+  gap: 5px;
+  font-size: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.star {
+  color: #ccc;
+}
+
+.star.active {
+  color: gold;
+}
+
 .success {
   display: none;
   text-align: center;
@@ -114,7 +124,7 @@ button:hover {
     <form id="form">
 
       <label>Como foi o atendimento?</label>
-      <select required>
+      <select id="atendimento" required>
         <option value="">Selecione</option>
         <option>Excelente</option>
         <option>Bom</option>
@@ -123,25 +133,34 @@ button:hover {
       </select>
 
       <label>Encontrou o que precisava?</label>
-      <select required>
+      <select id="encontrou" required>
         <option value="">Selecione</option>
         <option>Sim</option>
         <option>Não</option>
       </select>
 
       <label>O que você procurava?</label>
-      <input type="text">
+      <input type="text" id="produto">
 
       <label>Voltaria a comprar?</label>
-      <select required>
+      <select id="voltaria" required>
         <option value="">Selecione</option>
         <option>Sim</option>
         <option>Talvez</option>
         <option>Não</option>
       </select>
 
+      <label>Avaliação</label>
+      <div class="stars">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+      </div>
+
       <label>Sugestões</label>
-      <textarea></textarea>
+      <textarea id="comentario"></textarea>
 
       <button type="submit">Enviar</button>
 
@@ -152,10 +171,54 @@ button:hover {
 </div>
 
 <script>
+let nota = 0;
+const stars = document.querySelectorAll(".star");
+
+// estrelas
+stars.forEach((star, index) => {
+  star.addEventListener("click", () => {
+    nota = index + 1;
+    stars.forEach((s, i) => {
+      s.classList.toggle("active", i < nota);
+    });
+  });
+});
+
 document.getElementById("form").addEventListener("submit", function(e){
   e.preventDefault();
-  document.getElementById("msg").style.display = "block";
-  this.style.display = "none";
+
+  const atendimento = document.getElementById("atendimento").value;
+  const encontrou = document.getElementById("encontrou").value;
+  const produto = document.getElementById("produto").value;
+  const voltaria = document.getElementById("voltaria").value;
+  const comentario = document.getElementById("comentario").value;
+
+  if (!atendimento || !encontrou || !voltaria || nota === 0) {
+    alert("Preencha tudo!");
+    return;
+  }
+
+  fetch("https://script.google.com/macros/s/AKfycbyZ5LUQ8E85zzQfoG3t-JEIWl5VTUnYPvnSduIm83uzAdr2GwwF3XbldHKqaLK0lChj/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      atendimento,
+      encontrou,
+      produto,
+      voltaria,
+      nota,
+      comentario
+    })
+  })
+  .then(() => {
+    document.getElementById("msg").style.display = "block";
+    document.getElementById("form").reset();
+    nota = 0;
+    stars.forEach(s => s.classList.remove("active"));
+  })
+  .catch(() => {
+    alert("Erro ao enviar");
+  });
+
 });
 </script>
 

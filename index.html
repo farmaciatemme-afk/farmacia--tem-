@@ -6,6 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -13,14 +17,14 @@ body {
   justify-content: center;
 }
 
-/* FUNDO */
+/* FUNDO COM LOGO DESFOCADO */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(26,188,156,0.7), rgba(22,160,133,0.7)),
-    url('logo.jpg');
+    linear-gradient(135deg, rgba(26,188,156,0.8), rgba(22,160,133,0.8)),
+    url('logo.png');
   background-size: cover;
   background-position: center;
   filter: blur(12px);
@@ -35,33 +39,37 @@ body::before {
   z-index: 1;
 }
 
-/* CARD */
+/* CARD PREMIUM */
 .card {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.85);
   backdrop-filter: blur(12px);
   border-radius: 20px;
   padding: 22px;
   margin-bottom: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  animation: aparecer 0.6s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  animation: fadeUp 0.5s ease;
 }
 
-@keyframes aparecer {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeUp {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
+/* LOGO */
 .logo {
-  width: 100px;
+  width: 110px;
   display: block;
   margin: 0 auto 10px;
   border: none;
   background: transparent;
   box-shadow: none;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
 }
 
+/* TÍTULO */
 .titulo {
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .titulo h2 {
@@ -76,30 +84,19 @@ body::before {
 /* CAMPOS */
 .field {
   position: relative;
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .field input,
 .field textarea,
 .field select {
   width: 100%;
-  box-sizing: border-box;
   padding: 16px 12px 8px;
   border-radius: 12px;
   border: 1px solid #ddd;
   font-size: 15px;
   transition: 0.3s;
   background: white;
-}
-
-.field label {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  font-size: 13px;
-  color: #777;
-  pointer-events: none;
-  transition: 0.2s;
 }
 
 /* FOCO */
@@ -113,6 +110,16 @@ body::before {
 }
 
 /* LABEL FLUTUANTE */
+.field label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 13px;
+  color: #777;
+  pointer-events: none;
+  transition: 0.2s;
+}
+
 .field input:focus + label,
 .field input:not(:placeholder-shown) + label,
 .field textarea:focus + label,
@@ -143,10 +150,10 @@ body::before {
   text-shadow: 0 0 5px rgba(255,215,0,0.7);
 }
 
-/* BOTÃO */
+/* BOTÕES */
 .big-btn {
   width: 100%;
-  padding: 16px;
+  padding: 15px;
   margin-top: 15px;
   border: none;
   border-radius: 14px;
@@ -186,14 +193,12 @@ body::before {
 
   <div class="card">
 
-    <img src="logo.jpg" class="logo">
+    <img src="logo.png" class="logo">
 
     <div class="titulo">
       <h2>💊 Farmácia Tem</h2>
       <p>Avalie nosso atendimento</p>
     </div>
-
-    <div id="media" style="text-align:center;margin-bottom:10px;">Carregando...</div>
 
     <div class="field">
       <select id="atendimento">
@@ -296,22 +301,18 @@ function enviar() {
 const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
 async function carregar(){
-  try {
-    const res = await fetch(URL);
-    const data = await res.json();
+  const res = await fetch(URL);
+  const data = await res.json();
 
-    let lista = document.getElementById("lista");
-    lista.innerHTML = "";
+  let lista = document.getElementById("lista");
+  lista.innerHTML = "";
 
-    data.reverse().forEach(f=>{
-      let div = document.createElement("div");
-      div.className = "feedback";
-      div.innerHTML = `<b>⭐ ${f.Nota}</b><br>${f.Comentario || ""}`;
-      lista.appendChild(div);
-    });
-  } catch {
-    document.getElementById("media").innerText = "Erro ao carregar";
-  }
+  data.reverse().forEach(f=>{
+    let div = document.createElement("div");
+    div.className = "feedback";
+    div.innerHTML = `<b>⭐ ${f.Nota}</b><br>${f.Comentario || ""}`;
+    lista.appendChild(div);
+  });
 }
 
 carregar();

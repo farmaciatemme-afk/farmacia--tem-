@@ -2,114 +2,94 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Pesquisa - Farmácia Tem</title>
+<title>Farmácia Tem</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
 body {
   margin: 0;
-  height: 100vh;
+  font-family: Arial;
+  background: #0d0d0d;
+  color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
-  background: black;
-  position: relative;
-  overflow: hidden;
-}
-
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("logo.jpg") no-repeat center;
-  background-size: cover;
-  filter: blur(15px);
-  transform: scale(1.2);
-  opacity: 0.5;
 }
 
 .container {
-  position: relative;
-  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
 }
 
 .card {
-  width: 350px;
-  background: rgba(255,255,255,0.9);
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-p {
-  text-align: center;
+  background: #1c1c1c;
+  padding: 20px;
+  border-radius: 20px;
   margin-bottom: 20px;
-  color: #444;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-label {
-  font-weight: bold;
-  display: block;
-  margin-top: 10px;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  background: #222;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #000;
+h2, h3 {
+  text-align: center;
 }
 
 /* estrelas */
 .stars {
   display: flex;
   gap: 5px;
-  font-size: 25px;
+  font-size: 28px;
   cursor: pointer;
-  margin-top: 10px;
+  justify-content: center;
+  margin: 10px 0;
 }
 
 .star {
-  color: #ccc;
+  color: #555;
 }
 
 .star.active {
   color: gold;
 }
 
-.success {
-  display: none;
-  text-align: center;
+/* inputs */
+select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+/* botão */
+button {
+  width: 100%;
+  padding: 12px;
   margin-top: 15px;
-  color: green;
+  border: none;
+  border-radius: 10px;
+  background: #007aff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #005ecb;
+}
+
+/* feedback */
+.feedback {
+  background: #2a2a2a;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.media {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 </style>
 </head>
@@ -117,57 +97,57 @@ button:hover {
 <body>
 
 <div class="container">
+
+  <!-- FORM -->
   <div class="card">
-    <h2>💊 Sua opinião importa</h2>
-    <p>Farmácia Tem</p>
+    <h2>💊 Farmácia Tem</h2>
 
-    <form id="form">
+    <div id="media" class="media">⭐ Média: carregando...</div>
 
-      <label>Como foi o atendimento?</label>
-      <select id="atendimento" required>
-        <option value="">Selecione</option>
-        <option>Excelente</option>
-        <option>Bom</option>
-        <option>Regular</option>
-        <option>Ruim</option>
-      </select>
+    <label>Atendimento</label>
+    <select id="atendimento">
+      <option value="">Selecione</option>
+      <option>Excelente</option>
+      <option>Bom</option>
+      <option>Regular</option>
+      <option>Ruim</option>
+    </select>
 
-      <label>Encontrou o que precisava?</label>
-      <select id="encontrou" required>
-        <option value="">Selecione</option>
-        <option>Sim</option>
-        <option>Não</option>
-      </select>
+    <label>Encontrou o produto?</label>
+    <select id="encontrou">
+      <option value="">Selecione</option>
+      <option>Sim</option>
+      <option>Não</option>
+    </select>
 
-      <label>O que você procurava?</label>
-      <input type="text" id="produto">
+    <label>Voltaria?</label>
+    <select id="voltaria">
+      <option value="">Selecione</option>
+      <option>Sim</option>
+      <option>Talvez</option>
+      <option>Não</option>
+    </select>
 
-      <label>Voltaria a comprar?</label>
-      <select id="voltaria" required>
-        <option value="">Selecione</option>
-        <option>Sim</option>
-        <option>Talvez</option>
-        <option>Não</option>
-      </select>
+    <label>Avaliação</label>
+    <div class="stars">
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+    </div>
 
-      <label>Avaliação</label>
-      <div class="stars">
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-      </div>
+    <textarea id="comentario" placeholder="Comentário..."></textarea>
 
-      <label>Sugestões</label>
-      <textarea id="comentario"></textarea>
-
-      <button type="submit">Enviar</button>
-
-    </form>
-
-    <div id="msg" class="success">Obrigado!</div>
+    <button onclick="enviar()">Enviar</button>
   </div>
+
+  <!-- FEEDBACK -->
+  <div class="card">
+    <h3>💬 Opiniões dos clientes</h3>
+    <div id="lista"></div>
+  </div>
+
 </div>
 
 <script>
@@ -176,20 +156,16 @@ const stars = document.querySelectorAll(".star");
 
 // estrelas
 stars.forEach((star, index) => {
-  star.addEventListener("click", () => {
+  star.onclick = () => {
     nota = index + 1;
-    stars.forEach((s, i) => {
-      s.classList.toggle("active", i < nota);
-    });
-  });
+    stars.forEach((s,i)=> s.classList.toggle("active", i<nota));
+  };
 });
 
-document.getElementById("form").addEventListener("submit", function(e){
-  e.preventDefault();
-
+// ENVIO
+function enviar() {
   const atendimento = document.getElementById("atendimento").value;
   const encontrou = document.getElementById("encontrou").value;
-  const produto = document.getElementById("produto").value;
   const voltaria = document.getElementById("voltaria").value;
   const comentario = document.getElementById("comentario").value;
 
@@ -203,23 +179,53 @@ document.getElementById("form").addEventListener("submit", function(e){
     body: JSON.stringify({
       atendimento,
       encontrou,
-      produto,
       voltaria,
       nota,
       comentario
     })
   })
   .then(() => {
-    document.getElementById("msg").style.display = "block";
-    document.getElementById("form").reset();
-    nota = 0;
-    stars.forEach(s => s.classList.remove("active"));
+    alert("Feedback enviado!");
+    location.reload();
   })
-  .catch(() => {
-    alert("Erro ao enviar");
-  });
+  .catch(() => alert("Erro ao enviar"));
+}
 
-});
+// LINK DA TUA PLANILHA (JSON)
+const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
+
+// carregar dados
+async function carregar() {
+  try {
+    const res = await fetch(URL);
+    const data = await res.json();
+
+    let total = 0;
+    let lista = document.getElementById("lista");
+    lista.innerHTML = "";
+
+    data.reverse().forEach(f => {
+      total += Number(f.Nota);
+
+      const div = document.createElement("div");
+      div.className = "feedback";
+      div.innerHTML = `
+        ⭐ ${f.Nota}<br>
+        ${f.Comentario || ""}
+      `;
+      lista.appendChild(div);
+    });
+
+    let media = total / data.length;
+    document.getElementById("media").innerText =
+      "⭐ Média: " + media.toFixed(1);
+
+  } catch {
+    document.getElementById("media").innerText = "Erro ao carregar";
+  }
+}
+
+carregar();
 </script>
 
 </body>

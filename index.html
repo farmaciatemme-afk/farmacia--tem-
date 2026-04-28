@@ -33,7 +33,7 @@ body::before {
   width: 100%;
   max-width: 900px;
   padding: 20px;
-  padding-bottom: 120px;
+  padding-bottom: 160px;
   position: relative;
   z-index: 1;
 }
@@ -150,7 +150,9 @@ body::before {
   margin-top: 20px;
 }
 
-.whatsapp { background: #25d366; }
+.whatsapp {
+  background: #25d366;
+}
 
 /* FEEDBACK */
 .feedback {
@@ -160,10 +162,10 @@ body::before {
   margin-top: 10px;
 }
 
-/* BOTÃO FLUTUANTE */
+/* BOTÃO WHATS */
 .whats-float {
   position: fixed;
-  bottom: 90px;
+  bottom: 20px;
   right: 20px;
   width: 65px;
   height: 65px;
@@ -172,10 +174,14 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: pulse 1.5s infinite;
+  z-index: 9999;
+  animation: pulse 2s infinite;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-.whats-float img { width: 32px; }
+.whats-float img {
+  width: 32px;
+}
 
 @keyframes pulse {
   0% { transform: scale(1); }
@@ -318,7 +324,7 @@ body::before {
 <div class="card" style="text-align:center;">
 <h3>Fale conosco</h3>
 
-<a href="https://wa.me/5588997428848?text=Olá!%20😊%20Vim%20pelo%20site%20da%20Farmácia%20Tem.%0APode%20me%20ajudar?"
+<a href="https://wa.me/5588997428848?text=Olá!%20💊%20Gostaria%20de%20saber%20sobre%20medicamentos%20disponíveis%20e%20promoções.%20Pode%20me%20ajudar?"
 target="_blank"
 class="big-btn whatsapp"
 style="display:block;text-decoration:none;">
@@ -330,11 +336,11 @@ style="display:block;text-decoration:none;">
 
 </div>
 
-<a href="https://wa.me/5588997428848?text=Olá!" class="whats-float" target="_blank">
+<a href="https://wa.me/5588997428848?text=Olá!%20💊%20Gostaria%20de%20saber%20sobre%20medicamentos%20disponíveis%20e%20promoções.%20Pode%20me%20ajudar?"
+class="whats-float" target="_blank">
 <img src="whatsapp.png">
 </a>
 
-<!-- TELA SUCESSO -->
 <div id="successScreen">
 <div class="successBox">
 <div class="check">✓</div>
@@ -358,7 +364,6 @@ s.onclick=()=>{nota=i+1;document.querySelectorAll(".star").forEach((e,j)=>e.styl
 });
 
 function enviar(){
-
 if(!atendimento.value || !encontrou.value || !voltaria.value || nota===0){
 alert("Preencha tudo!");
 return;

@@ -37,31 +37,6 @@ body::before {
   z-index: 1;
 }
 
-.tabs {
-  display: flex;
-  margin-bottom: 15px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.tab {
-  flex: 1;
-  padding: 12px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.tab.active {
-  background: white;
-  color: #1abc9c;
-}
-
-.aba { display: none; }
-.aba.ativa { display: block; }
-
 .card {
   background: rgba(255,255,255,0.95);
   border-radius: 20px;
@@ -151,7 +126,6 @@ body::before {
 <p>Avalie nosso atendimento</p>
 </div>
 
-<!-- ATENDENTE -->
 <div class="field">
 <input id="atendente" placeholder=" " required>
 <label>Nome do atendente</label>
@@ -216,7 +190,7 @@ body::before {
 </div>
 
 <script>
-const SCRIPT_URL = "COLE_SEU_LINK_AQUI";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXgj4VFCpD_IbxIOzwvQflju9tiAwXvkLPvwoohmDRbBWbowlmxuMzh-DN3_41S/exec";
 const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
 const atendente = document.getElementById("atendente");

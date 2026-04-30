@@ -24,14 +24,16 @@ body::before {
     linear-gradient(135deg, rgba(26,188,156,0.8), rgba(22,160,133,0.8)),
     url('logo.png');
   background-size: cover;
-  filter: blur(8px);
+  filter: blur(12px) brightness(0.9);
 }
 
 /* CONTAINER */
 .container {
-  max-width: 900px;
-  padding: 20px;
-  padding-bottom: 160px;
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  padding: 15px;
+  padding-bottom: 200px;
   position: relative;
   z-index: 1;
 }
@@ -39,59 +41,61 @@ body::before {
 /* CARD */
 .card {
   background: rgba(255,255,255,0.95);
-  border-radius: 20px;
-  padding: 25px;
-  margin-top: 25px;
+  border-radius: 24px;
+  padding: 22px;
+  margin-top: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
 }
 
 /* LOGO */
 .logo {
-  width: 110px;
+  width: 90px;
   display: block;
   margin: auto;
 }
 
-/* INPUT */
+/* TITULO */
+h2 {
+  text-align: center;
+  font-size: 22px;
+}
+
+/* CAMPOS */
 .field {
-  position: relative;
-  margin: 18px auto;
-  max-width: 500px;
+  margin: 12px 0;
 }
 
 .field input,
 .field textarea,
 .field select {
   width: 100%;
-  padding: 16px;
+  padding: 15px;
   border-radius: 14px;
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
+  background: #fafafa;
+  font-size: 15px;
 }
 
+/* FOCO */
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: #1abc9c;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(26,188,156,0.15);
+  transform: scale(1.02);
+}
+
+/* LABEL */
 .field label {
-  position: absolute;
-  left: 12px;
-  top: 14px;
-  color: #999;
-  background: white;
-  padding: 0 5px;
-  transition: 0.2s;
-}
-
-.field input:focus + label,
-.field input:not(:placeholder-shown) + label,
-.field textarea:focus + label,
-.field textarea:not(:placeholder-shown) + label,
-.field select:focus + label,
-.field select:valid + label {
-  top: -8px;
-  font-size: 12px;
-  color: #1abc9c;
+  font-size: 13px;
+  margin-left: 5px;
 }
 
 /* ESTRELAS */
 .stars {
   text-align: center;
-  font-size: 28px;
+  font-size: 26px;
 }
 
 .star {
@@ -102,41 +106,47 @@ body::before {
 /* BOTÃO */
 .big-btn {
   width: 100%;
-  padding: 15px;
-  border: none;
-  border-radius: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  font-size: 16px;
   background: #e53935;
   color: white;
-  margin-top: 20px;
+  border: none;
+  margin-top: 18px;
+  transition: 0.2s;
+}
+
+.big-btn:active {
+  transform: scale(0.96);
 }
 
 /* FEEDBACK */
 .feedback {
-  background: #fff;
-  padding: 15px;
-  border-radius: 12px;
+  padding: 14px;
+  border-radius: 14px;
   margin-top: 10px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.08);
+  background: #f9f9f9;
+  border-left: 4px solid #1abc9c;
 }
 
 /* WHATS */
 .whats {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 65px;
-  height: 65px;
+  bottom: 18px;
+  right: 18px;
+  width: 62px;
+  height: 62px;
   background: #25d366;
   border-radius: 50%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 999;
   animation: pulse 2s infinite;
 }
 
 .whats img {
-  width: 32px;
+  width: 30px;
 }
 
 @keyframes pulse {
@@ -144,7 +154,7 @@ body::before {
 }
 
 /* OVERLAY */
-#overlay{
+#overlay {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
@@ -154,21 +164,14 @@ body::before {
   z-index:9999;
 }
 
-.box{
+.box {
   background:white;
   padding:30px;
   border-radius:20px;
   text-align:center;
-  animation: scaleUp 0.3s ease;
 }
 
-@keyframes scaleUp{
-  from{ transform:scale(0.8); opacity:0; }
-  to{ transform:scale(1); opacity:1; }
-}
-
-/* LOADER */
-.loader{
+.loader {
   width:40px;
   height:40px;
   border:4px solid #ddd;
@@ -178,18 +181,17 @@ body::before {
   margin:auto;
 }
 
-@keyframes spin{
-  to{ transform:rotate(360deg); }
+@keyframes spin {
+  to { transform:rotate(360deg); }
 }
 
-/* CHECK */
-.check{
+.check {
   font-size:40px;
   color:#2ecc71;
 }
 
 /* TOAST */
-.toast{
+.toast {
   position: fixed;
   bottom: 90px;
   left: 50%;
@@ -210,46 +212,46 @@ body::before {
 <div class="card">
 <img src="logo.png" class="logo">
 
-<h2 style="text-align:center;">Farmácia Tem</h2>
+<h2>Farmácia Tem</h2>
 
 <div class="field">
-<input id="atendente" placeholder=" ">
 <label>Nome do atendente</label>
+<input id="atendente">
 </div>
 
 <div class="field">
-<select id="atendimento" required>
+<label>Atendimento</label>
+<select id="atendimento">
 <option value="" disabled selected></option>
 <option>Excelente</option>
 <option>Bom</option>
 <option>Regular</option>
 <option>Ruim</option>
 </select>
-<label>Atendimento</label>
 </div>
 
 <div class="field">
-<select id="encontrou" required>
+<label>Encontrou?</label>
+<select id="encontrou">
 <option value="" disabled selected></option>
 <option>Sim</option>
 <option>Não</option>
 </select>
-<label>Encontrou?</label>
 </div>
 
 <div class="field">
-<input id="produto" placeholder=" ">
 <label>Produto</label>
+<input id="produto">
 </div>
 
 <div class="field">
-<select id="voltaria" required>
+<label>Voltaria?</label>
+<select id="voltaria">
 <option value="" disabled selected></option>
 <option>Sim</option>
 <option>Talvez</option>
 <option>Não</option>
 </select>
-<label>Voltaria?</label>
 </div>
 
 <div class="stars">
@@ -261,8 +263,8 @@ body::before {
 </div>
 
 <div class="field">
-<textarea id="comentario" placeholder=" "></textarea>
 <label>Sugestões</label>
+<textarea id="comentario"></textarea>
 </div>
 
 <button class="big-btn" onclick="enviar()">Enviar</button>
@@ -294,7 +296,6 @@ document.querySelectorAll(".star").forEach((s,i)=>{
   };
 });
 
-/* ENVIAR */
 function enviar(){
 
   const tempoBloqueio = 10 * 60 * 1000;
@@ -316,7 +317,7 @@ function enviar(){
   fetch(SCRIPT_URL,{
     method:"POST",
     body:JSON.stringify({
-      nota: nota,
+      nota,
       comentario: document.getElementById("comentario").value
     })
   })
@@ -347,7 +348,7 @@ function mostrarSucesso(){
   overlay.innerHTML = `
     <div class="box">
       <div class="check">✔</div>
-      <p>Enviado com sucesso!</p>
+      <p>Enviado!</p>
     </div>`;
 }
 

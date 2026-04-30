@@ -31,7 +31,7 @@ body::before {
 .container {
   max-width: 900px;
   padding: 20px;
-  padding-bottom: 180px;
+  padding-bottom: 160px;
   position: relative;
   z-index: 1;
 }
@@ -119,7 +119,7 @@ body::before {
   box-shadow: 0 5px 10px rgba(0,0,0,0.08);
 }
 
-/* WHATS FLUTUANTE */
+/* WHATS */
 .whats {
   position: fixed;
   bottom: 20px;
@@ -131,7 +131,6 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   z-index: 999;
   animation: pulse 2s infinite;
 }
@@ -140,30 +139,66 @@ body::before {
   width: 32px;
 }
 
-/* ANIMAÇÃO */
 @keyframes pulse {
-  0% { transform: scale(1); }
   50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
 }
 
-/* ANIMAÇÃO ENVIO */
-.sucesso {
+/* OVERLAY */
+#overlay{
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 22px;
-  z-index: 9999;
-  animation: fade 0.3s;
+  background: rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
 
-@keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.box{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  animation: scaleUp 0.3s ease;
+}
+
+@keyframes scaleUp{
+  from{ transform:scale(0.8); opacity:0; }
+  to{ transform:scale(1); opacity:1; }
+}
+
+/* LOADER */
+.loader{
+  width:40px;
+  height:40px;
+  border:4px solid #ddd;
+  border-top:4px solid #1abc9c;
+  border-radius:50%;
+  animation: spin 1s linear infinite;
+  margin:auto;
+}
+
+@keyframes spin{
+  to{ transform:rotate(360deg); }
+}
+
+/* CHECK */
+.check{
+  font-size:40px;
+  color:#2ecc71;
+}
+
+/* TOAST */
+.toast{
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 20px;
+  z-index: 9999;
 }
 </style>
 </head>
@@ -240,14 +275,14 @@ body::before {
 
 </div>
 
-<!-- BOTÃO WHATS -->
+<!-- WHATS -->
 <a href="https://wa.me/5588997428848?text=Olá!%20💊%20Gostaria%20de%20saber%20sobre%20medicamentos%20e%20promoções."
 class="whats" target="_blank">
 <img src="whatsapp.png">
 </a>
 
 <script>
-const SCRIPT_URL = "SEU_SCRIPT_AQUI";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfSgJveiEcP522pr5nLCHfRJdLjYzc0t70KhsJn9UmAP1q-OOWabTornfnhhFa43Ox/exec";
 const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
 let nota = 0;
@@ -259,22 +294,72 @@ document.querySelectorAll(".star").forEach((s,i)=>{
   };
 });
 
+/* ENVIAR */
 function enviar(){
-  if(nota===0){
-    alert("Preencha a avaliação!");
+
+  const tempoBloqueio = 10 * 60 * 1000;
+  const ultimoEnvio = localStorage.getItem("ultimoEnvio");
+
+  if (ultimoEnvio && (Date.now() - ultimoEnvio < tempoBloqueio)) {
+    let restante = Math.ceil((tempoBloqueio - (Date.now() - ultimoEnvio)) / 60000);
+    mostrarMensagem(`⏳ Aguarde ${restante} min`);
     return;
   }
 
-  document.body.innerHTML += '<div class="sucesso">✅ Enviado com sucesso!</div>';
+  if(nota === 0){
+    mostrarMensagem("⚠️ Dê uma nota");
+    return;
+  }
+
+  mostrarLoading();
 
   fetch(SCRIPT_URL,{
     method:"POST",
-    body:JSON.stringify({nota}),
-  }).then(()=>{
-    setTimeout(()=>location.reload(),1500);
+    body:JSON.stringify({
+      nota: nota,
+      comentario: document.getElementById("comentario").value
+    })
+  })
+  .then(()=>{
+    localStorage.setItem("ultimoEnvio", Date.now());
+    mostrarSucesso();
+    setTimeout(()=>location.reload(),2000);
+  })
+  .catch(()=>{
+    mostrarMensagem("Erro ao enviar");
   });
 }
 
+/* ANIMAÇÕES */
+function mostrarLoading(){
+  let div = document.createElement("div");
+  div.id = "overlay";
+  div.innerHTML = `
+    <div class="box">
+      <div class="loader"></div>
+      <p>Enviando...</p>
+    </div>`;
+  document.body.appendChild(div);
+}
+
+function mostrarSucesso(){
+  let overlay = document.getElementById("overlay");
+  overlay.innerHTML = `
+    <div class="box">
+      <div class="check">✔</div>
+      <p>Enviado com sucesso!</p>
+    </div>`;
+}
+
+function mostrarMensagem(msg){
+  let div = document.createElement("div");
+  div.className = "toast";
+  div.innerText = msg;
+  document.body.appendChild(div);
+  setTimeout(()=>div.remove(),3000);
+}
+
+/* FEEDBACK */
 async function carregar(){
   let lista = document.getElementById("lista");
 

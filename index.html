@@ -22,16 +22,16 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(26,188,156,0.85), rgba(22,160,133,0.85)),
+    linear-gradient(135deg, rgba(26,188,156,0.9), rgba(22,160,133,0.9)),
     url('logo.png');
   background-size: cover;
-  filter: blur(12px);
+  filter: blur(10px);
   z-index: 0;
 }
 
 .container {
   width: 100%;
-  max-width: 520px;
+  max-width: 420px;
   padding: 15px;
   position: relative;
   z-index: 1;
@@ -40,45 +40,43 @@ body::before {
 /* CARD */
 .card {
   background: #fff;
-  border-radius: 25px;
-  padding: 22px;
+  border-radius: 20px;
+  padding: 20px;
   margin-top: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 /* LOGO */
 .logo {
-  width: 85px;
+  width: 90px;
   display: block;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 
-/* TITULO */
 .titulo {
   text-align: center;
 }
 
-/* INPUT */
+/* CAMPOS */
 .field {
   position: relative;
-  margin-top: 16px;
+  margin: 15px 0;
 }
 
 .field input,
 .field select,
 .field textarea {
   width: 100%;
-  padding: 15px;
+  padding: 16px;
   border-radius: 14px;
   border: 1px solid #ddd;
   font-size: 15px;
 }
 
-/* LABEL */
 .field label {
   position: absolute;
   left: 12px;
-  top: 13px;
+  top: 14px;
   color: #999;
   background: #fff;
   padding: 0 5px;
@@ -87,9 +85,10 @@ body::before {
 
 .field input:focus + label,
 .field input:not(:placeholder-shown) + label,
-.field select:valid + label,
 .field textarea:focus + label,
-.field textarea:not(:placeholder-shown) + label {
+.field textarea:not(:placeholder-shown) + label,
+.field select:focus + label,
+.field select:valid + label {
   top: -8px;
   font-size: 12px;
   color: #1abc9c;
@@ -98,36 +97,32 @@ body::before {
 /* ESTRELAS */
 .stars {
   text-align: center;
-  font-size: 30px;
-  margin-top: 10px;
+  font-size: 28px;
 }
 
 .star {
   color: #ccc;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 /* BOTÃO */
 .big-btn {
   width: 100%;
   padding: 15px;
-  margin-top: 18px;
   border: none;
   border-radius: 14px;
   background: #e53935;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
+  color: white;
+  margin-top: 20px;
+  font-size: 16px;
 }
 
 /* FEEDBACK */
 .feedback {
   background: #f9f9f9;
-  padding: 12px;
-  border-radius: 12px;
+  padding: 10px;
+  border-radius: 10px;
   margin-top: 10px;
-  font-size: 14px;
 }
 
 /* WHATSAPP */
@@ -135,56 +130,43 @@ body::before {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  background: #25d366;
   width: 65px;
   height: 65px;
-  background: #25d366;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
   z-index: 999;
-  animation: pulse 2s infinite;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
 }
 
 .whats img {
-  width: 30px;
+  width: 32px;
 }
 
-/* PULSE */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-/* ANIMAÇÃO ENVIO */
+/* ANIMAÇÃO */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.5);
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
 
-.box {
-  background: #fff;
+.loader {
+  background: white;
   padding: 30px;
   border-radius: 20px;
   text-align: center;
-  animation: pop 0.3s ease;
 }
 
-@keyframes pop {
-  from { transform: scale(0.6); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.check {
-  font-size: 50px;
-  color: #2ecc71;
+.loader span {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -264,25 +246,27 @@ body::before {
 
 </div>
 
-<!-- BOTÃO WHATS -->
-<a href="https://wa.me/5588997428848?text=Olá!%20💊%20Gostaria%20de%20saber%20sobre%20medicamentos%20e%20promoções.%20Pode%20me%20ajudar?"
+<!-- WHATS -->
+<a href="https://wa.me/5588997428848?text=Olá! 💊 Gostaria de saber sobre medicamentos disponíveis e promoções. Pode me ajudar?"
 class="whats" target="_blank">
 <img src="whatsapp.png">
 </a>
 
 <!-- ANIMAÇÃO -->
 <div class="overlay" id="overlay">
-<div class="box">
-<div class="check">✔</div>
-<p>Enviado com sucesso!</p>
-</div>
+  <div class="loader">
+    ⏳
+    <span>Enviando...</span>
+  </div>
 </div>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfSgJveiEcP522pr5nLCHfRJdLjYzc0t70KhsJn9UmAP1q-OOWabTornfnhhFa43Ox/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0TtRNqQYFQa_uUC7QwkWEURw31deDCIcbb6iaNzjAEcetpT3OYTOU9R8QxsyevjXZ/exec";
 const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
 let nota = 0;
+
+// estrelas
 document.querySelectorAll(".star").forEach((s,i)=>{
   s.onclick=()=>{
     nota=i+1;
@@ -290,40 +274,56 @@ document.querySelectorAll(".star").forEach((s,i)=>{
   };
 });
 
+// ENVIAR
 function enviar(){
 
-  let ultimo = localStorage.getItem("tempo");
+  let ultimo = localStorage.getItem("tempoEnvio");
   let agora = Date.now();
 
-  if(ultimo && (agora - ultimo < 600000)){
-    alert("Espere 10 minutos para avaliar novamente.");
+  if(ultimo && agora - ultimo < 600000){
+    alert("Aguarde 10 minutos para enviar outra avaliação");
     return;
   }
 
-  let data = {
-    atendente: document.getElementById("atendente").value,
-    atendimento: document.getElementById("atendimento").value,
-    encontrou: document.getElementById("encontrou").value,
-    produto: document.getElementById("produto").value,
-    voltaria: document.getElementById("voltaria").value,
-    nota: nota,
-    comentario: document.getElementById("comentario").value
-  };
+  let atendente = document.getElementById("atendente").value;
+  let atendimento = document.getElementById("atendimento").value;
+  let encontrou = document.getElementById("encontrou").value;
+  let produto = document.getElementById("produto").value;
+  let voltaria = document.getElementById("voltaria").value;
+  let comentario = document.getElementById("comentario").value;
 
-  fetch(SCRIPT_URL,{
-    method:"POST",
-    body: JSON.stringify(data)
+  if(!atendente || !atendimento || !encontrou || !voltaria || nota===0){
+    alert("Preencha tudo!");
+    return;
+  }
+
+  document.getElementById("overlay").style.display = "flex";
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      atendente,
+      atendimento,
+      encontrou,
+      produto,
+      voltaria,
+      nota,
+      comentario
+    })
   })
   .then(()=>{
-    localStorage.setItem("tempo", agora);
+    localStorage.setItem("tempoEnvio", agora);
 
-    document.getElementById("overlay").style.display="flex";
+    document.querySelector(".loader").innerHTML = "✅<span>Enviado com sucesso!</span>";
 
-    setTimeout(()=>location.reload(),2000);
+    setTimeout(()=>location.reload(), 2000);
   })
-  .catch(()=>alert("Erro ao enviar"));
+  .catch(()=>{
+    alert("Erro ao enviar");
+  });
 }
 
+// CARREGAR
 async function carregar(){
   try{
     let res = await fetch(URL);
@@ -332,9 +332,10 @@ async function carregar(){
     lista.innerHTML="";
 
     data.reverse().forEach(f=>{
+      if(!f.Nota) return;
+
       lista.innerHTML+=`
       <div class="feedback">
-        ${f.Atendente ? "👤 " + f.Atendente + "<br>" : ""}
         ⭐ ${f.Nota}<br>
         ${f.Comentario || ""}
       </div>`;

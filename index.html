@@ -2,172 +2,121 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Farmácia Tem</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farmácia Tem</title>
 
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  background: #1abc9c;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#1abc9c,#16a085);
+  display:flex;
+  justify-content:center;
 }
 
-/* FUNDO */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    linear-gradient(135deg, rgba(26,188,156,0.9), rgba(22,160,133,0.9)),
-    url('logo.png');
-  background-size: cover;
-  filter: blur(10px);
-  z-index: 0;
-}
-
-.container {
-  width: 100%;
-  max-width: 420px;
-  padding: 15px;
-  position: relative;
-  z-index: 1;
+/* CONTAINER */
+.container{
+  width:100%;
+  max-width:420px;
+  padding:16px;
 }
 
 /* CARD */
-.card {
-  background: #fff;
-  border-radius: 20px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+.card{
+  background:#fff;
+  border-radius:22px;
+  padding:20px;
+  margin-top:18px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
 }
 
-/* LOGO */
-.logo {
-  width: 90px;
-  display: block;
-  margin: 10px auto;
-}
-
-.titulo {
-  text-align: center;
-}
+/* TITULO */
+h2{margin:0 0 6px;text-align:center}
+p{margin:0 0 12px;text-align:center;color:#666}
 
 /* CAMPOS */
-.field {
-  position: relative;
-  margin: 15px 0;
-}
-
+.field{margin:12px 0}
 .field input,
 .field select,
-.field textarea {
-  width: 100%;
-  padding: 16px;
-  border-radius: 14px;
-  border: 1px solid #ddd;
-  font-size: 15px;
-}
-
-.field label {
-  position: absolute;
-  left: 12px;
-  top: 14px;
-  color: #999;
-  background: #fff;
-  padding: 0 5px;
-  transition: 0.2s;
-}
-
-.field input:focus + label,
-.field input:not(:placeholder-shown) + label,
-.field textarea:focus + label,
-.field textarea:not(:placeholder-shown) + label,
-.field select:focus + label,
-.field select:valid + label {
-  top: -8px;
-  font-size: 12px;
-  color: #1abc9c;
+.field textarea{
+  width:100%;
+  padding:16px;
+  border-radius:14px;
+  border:1px solid #ddd;
+  font-size:15px;
 }
 
 /* ESTRELAS */
-.stars {
-  text-align: center;
-  font-size: 28px;
-}
-
-.star {
-  color: #ccc;
-  cursor: pointer;
-}
+.stars{text-align:center;font-size:30px}
+.star{color:#ccc;cursor:pointer;transition:.2s}
 
 /* BOTÃO */
-.big-btn {
-  width: 100%;
-  padding: 15px;
-  border: none;
-  border-radius: 14px;
-  background: #e53935;
-  color: white;
-  margin-top: 20px;
-  font-size: 16px;
+.big-btn{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:14px;
+  background:#e53935;
+  color:#fff;
+  font-weight:bold;
+  margin-top:15px;
 }
 
 /* FEEDBACK */
-.feedback {
-  background: #f9f9f9;
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 10px;
+.feedback{
+  background:#f6f6f6;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
+  font-size:14px;
 }
 
-/* WHATSAPP */
-.whats {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25d366;
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+/* WHATS PULSANDO */
+.whats{
+  position:fixed;
+  bottom:18px;
+  right:18px;
+  width:70px;
+  height:70px;
+  background:#25d366;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 6px 25px rgba(0,0,0,.3);
+  animation:pulse 1.4s infinite;
+  z-index:999;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.12)}
+  100%{transform:scale(1)}
+}
+.whats img{width:34px}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
 
-.whats img {
-  width: 32px;
+.loader{
+  width:65px;
+  height:65px;
+  border:6px solid #eee;
+  border-top:6px solid #1abc9c;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
 }
 
-/* ANIMAÇÃO */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-.loader {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-}
-
-.loader span {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 
@@ -176,51 +125,42 @@ body::before {
 <div class="container">
 
 <div class="card">
-<img src="logo.png" class="logo">
-
-<div class="titulo">
 <h2>Farmácia Tem</h2>
 <p>Avalie nosso atendimento</p>
+
+<div class="field">
+<input id="atendente" placeholder="Nome do atendente">
 </div>
 
 <div class="field">
-<input id="atendente" placeholder=" ">
-<label>Nome do atendente</label>
-</div>
-
-<div class="field">
-<select id="atendimento" required>
-<option value="" disabled selected></option>
+<select id="atendimento">
+<option value="">Atendimento</option>
 <option>Excelente</option>
 <option>Bom</option>
 <option>Regular</option>
 <option>Ruim</option>
 </select>
-<label>Atendimento</label>
 </div>
 
 <div class="field">
-<select id="encontrou" required>
-<option value="" disabled selected></option>
+<select id="encontrou">
+<option value="">Encontrou?</option>
 <option>Sim</option>
 <option>Não</option>
 </select>
-<label>Encontrou?</label>
 </div>
 
 <div class="field">
-<input id="produto" placeholder=" ">
-<label>Produto</label>
+<input id="produto" placeholder="Produto">
 </div>
 
 <div class="field">
-<select id="voltaria" required>
-<option value="" disabled selected></option>
+<select id="voltaria">
+<option value="">Voltaria?</option>
 <option>Sim</option>
 <option>Talvez</option>
 <option>Não</option>
 </select>
-<label>Voltaria?</label>
 </div>
 
 <div class="stars">
@@ -232,41 +172,38 @@ body::before {
 </div>
 
 <div class="field">
-<textarea id="comentario" placeholder=" "></textarea>
-<label>Sugestões</label>
+<textarea id="comentario" placeholder="Sugestões"></textarea>
 </div>
 
-<button class="big-btn" onclick="enviar()">Enviar</button>
+<button class="big-btn" onclick="enviar()">Enviar avaliação</button>
 </div>
 
 <div class="card">
-<h3>Feedback</h3>
+<h3>Feedback (<span id="total">0</span>)</h3>
 <div id="lista">Carregando...</div>
 </div>
 
 </div>
 
 <!-- WHATS -->
-<a href="https://wa.me/5588997428848?text=Olá! 💊 Gostaria de saber sobre medicamentos disponíveis e promoções. Pode me ajudar?"
+<a href="https://wa.me/5588997428848?text=Olá! Preciso de ajuda."
 class="whats" target="_blank">
 <img src="whatsapp.png">
 </a>
 
-<!-- ANIMAÇÃO -->
+<!-- OVERLAY -->
 <div class="overlay" id="overlay">
-  <div class="loader">
-    ⏳
-    <span>Enviando...</span>
-  </div>
+<div class="loader"></div>
+<p style="margin-top:15px">Enviando sua avaliação...</p>
 </div>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0TtRNqQYFQa_uUC7QwkWEURw31deDCIcbb6iaNzjAEcetpT3OYTOU9R8QxsyevjXZ/exec";
-const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbx0TtRNqQYFQa_uUC7QwkWEURw31deDCIcbb6iaNzjAEcetpT3OYTOU9R8QxsyevjXZ/exec";
+const URL="https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
-let nota = 0;
+let nota=0;
 
-// estrelas
+/* estrelas */
 document.querySelectorAll(".star").forEach((s,i)=>{
   s.onclick=()=>{
     nota=i+1;
@@ -274,62 +211,68 @@ document.querySelectorAll(".star").forEach((s,i)=>{
   };
 });
 
-// ENVIAR
+/* ENVIAR */
 function enviar(){
 
-  let ultimo = localStorage.getItem("tempoEnvio");
-  let agora = Date.now();
-
-  if(ultimo && agora - ultimo < 600000){
-    alert("Aguarde 10 minutos para enviar outra avaliação");
-    return;
-  }
-
-  let atendente = document.getElementById("atendente").value;
-  let atendimento = document.getElementById("atendimento").value;
-  let encontrou = document.getElementById("encontrou").value;
-  let produto = document.getElementById("produto").value;
-  let voltaria = document.getElementById("voltaria").value;
-  let comentario = document.getElementById("comentario").value;
-
-  if(!atendente || !atendimento || !encontrou || !voltaria || nota===0){
+  if(!atendente.value || !atendimento.value || !encontrou.value || !voltaria.value || nota===0){
     alert("Preencha tudo!");
     return;
   }
 
-  document.getElementById("overlay").style.display = "flex";
+  let ultimo=localStorage.getItem("tempo");
+  let agora=Date.now();
 
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      atendente,
-      atendimento,
-      encontrou,
-      produto,
-      voltaria,
-      nota,
-      comentario
+  if(ultimo && agora-ultimo<600000){
+    alert("Aguarde 10 minutos para avaliar novamente");
+    return;
+  }
+
+  overlay.style.display="flex";
+
+  fetch(SCRIPT_URL,{
+    method:"POST",
+    body:JSON.stringify({
+      atendente:atendente.value,
+      atendimento:atendimento.value,
+      encontrou:encontrou.value,
+      produto:produto.value,
+      voltaria:voltaria.value,
+      nota:nota,
+      comentario:comentario.value
     })
   })
   .then(()=>{
-    localStorage.setItem("tempoEnvio", agora);
 
-    document.querySelector(".loader").innerHTML = "✅<span>Enviado com sucesso!</span>";
+    localStorage.setItem("tempo",agora);
 
-    setTimeout(()=>location.reload(), 2000);
+    setTimeout(()=>{
+      alert("Obrigado! 🙌\nAgora você pode avaliar no Google ⭐");
+    },600);
+
+    // 👉 SEU LINK REAL
+    setTimeout(()=>{
+      window.open("https://g.page/r/Cewsxt13lIojEAE/review","_blank");
+    },1300);
+
+    setTimeout(()=>{
+      location.reload();
+    },2500);
+
   })
   .catch(()=>{
     alert("Erro ao enviar");
+    location.reload();
   });
 }
 
-// CARREGAR
+/* FEEDBACK AUTOMÁTICO */
 async function carregar(){
   try{
-    let res = await fetch(URL);
-    let data = await res.json();
+    let res=await fetch(URL);
+    let data=await res.json();
 
     lista.innerHTML="";
+    total.innerText=data.length;
 
     data.reverse().forEach(f=>{
       if(!f.Nota) return;
@@ -337,7 +280,7 @@ async function carregar(){
       lista.innerHTML+=`
       <div class="feedback">
         ⭐ ${f.Nota}<br>
-        ${f.Comentario || ""}
+        ${f.Comentario||""}
       </div>`;
     });
 
@@ -346,6 +289,7 @@ async function carregar(){
   }
 }
 
+setInterval(carregar,5000);
 carregar();
 </script>
 

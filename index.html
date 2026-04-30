@@ -10,11 +10,12 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   display: flex;
   justify-content: center;
 }
 
+/* FUNDO */
 body::before {
   content: "";
   position: fixed;
@@ -23,20 +24,19 @@ body::before {
     linear-gradient(135deg, rgba(26,188,156,0.8), rgba(22,160,133,0.8)),
     url('logo.png');
   background-size: cover;
-  background-position: center;
   filter: blur(8px);
-  z-index: 0;
 }
 
+/* CONTAINER */
 .container {
-  width: 100%;
   max-width: 900px;
   padding: 20px;
-  padding-bottom: 160px;
+  padding-bottom: 180px;
   position: relative;
   z-index: 1;
 }
 
+/* CARD */
 .card {
   background: rgba(255,255,255,0.95);
   border-radius: 20px;
@@ -44,14 +44,14 @@ body::before {
   margin-top: 25px;
 }
 
+/* LOGO */
 .logo {
   width: 110px;
   display: block;
-  margin: 10px auto;
+  margin: auto;
 }
 
-.titulo { text-align: center; }
-
+/* INPUT */
 .field {
   position: relative;
   margin: 18px auto;
@@ -72,9 +72,9 @@ body::before {
   left: 12px;
   top: 14px;
   color: #999;
-  transition: 0.2s;
   background: white;
   padding: 0 5px;
+  transition: 0.2s;
 }
 
 .field input:focus + label,
@@ -88,13 +88,18 @@ body::before {
   color: #1abc9c;
 }
 
+/* ESTRELAS */
 .stars {
   text-align: center;
   font-size: 28px;
 }
 
-.star { cursor: pointer; color: #ccc; }
+.star {
+  cursor: pointer;
+  color: #ccc;
+}
 
+/* BOTÃO */
 .big-btn {
   width: 100%;
   padding: 15px;
@@ -105,11 +110,60 @@ body::before {
   margin-top: 20px;
 }
 
+/* FEEDBACK */
 .feedback {
   background: #fff;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 12px;
   margin-top: 10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.08);
+}
+
+/* WHATS FLUTUANTE */
+.whats {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 65px;
+  height: 65px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  z-index: 999;
+  animation: pulse 2s infinite;
+}
+
+.whats img {
+  width: 32px;
+}
+
+/* ANIMAÇÃO */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* ANIMAÇÃO ENVIO */
+.sucesso {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 22px;
+  z-index: 9999;
+  animation: fade 0.3s;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 </style>
 </head>
@@ -121,13 +175,10 @@ body::before {
 <div class="card">
 <img src="logo.png" class="logo">
 
-<div class="titulo">
-<h2>Farmácia Tem</h2>
-<p>Avalie nosso atendimento</p>
-</div>
+<h2 style="text-align:center;">Farmácia Tem</h2>
 
 <div class="field">
-<input id="atendente" placeholder=" " required>
+<input id="atendente" placeholder=" ">
 <label>Nome do atendente</label>
 </div>
 
@@ -189,19 +240,18 @@ body::before {
 
 </div>
 
+<!-- BOTÃO WHATS -->
+<a href="https://wa.me/5588997428848?text=Olá!%20💊%20Gostaria%20de%20saber%20sobre%20medicamentos%20e%20promoções."
+class="whats" target="_blank">
+<img src="whatsapp.png">
+</a>
+
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfSgJveiEcP522pr5nLCHfRJdLjYzc0t70KhsJn9UmAP1q-OOWabTornfnhhFa43Ox/exec";
+const SCRIPT_URL = "SEU_SCRIPT_AQUI";
 const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
-const atendente = document.getElementById("atendente");
-const atendimento = document.getElementById("atendimento");
-const encontrou = document.getElementById("encontrou");
-const produto = document.getElementById("produto");
-const voltaria = document.getElementById("voltaria");
-const comentario = document.getElementById("comentario");
-const lista = document.getElementById("lista");
-
 let nota = 0;
+
 document.querySelectorAll(".star").forEach((s,i)=>{
   s.onclick=()=>{
     nota=i+1;
@@ -210,51 +260,39 @@ document.querySelectorAll(".star").forEach((s,i)=>{
 });
 
 function enviar(){
-  if(!atendente.value || !atendimento.value || !encontrou.value || !voltaria.value || nota===0){
-    alert("Preencha tudo!");
+  if(nota===0){
+    alert("Preencha a avaliação!");
     return;
   }
 
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      atendente: atendente.value,
-      atendimento: atendimento.value,
-      encontrou: encontrou.value,
-      produto: produto.value,
-      voltaria: voltaria.value,
-      nota: nota,
-      comentario: comentario.value
-    }),
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    }
-  })
-  .then(() => {
-    alert("Enviado com sucesso!");
-    location.reload();
-  })
-  .catch((erro) => {
-    console.error(erro);
-    alert("Erro ao enviar");
+  document.body.innerHTML += '<div class="sucesso">✅ Enviado com sucesso!</div>';
+
+  fetch(SCRIPT_URL,{
+    method:"POST",
+    body:JSON.stringify({nota}),
+  }).then(()=>{
+    setTimeout(()=>location.reload(),1500);
   });
 }
 
 async function carregar(){
-  try {
+  let lista = document.getElementById("lista");
+
+  try{
     let res = await fetch(URL);
     let data = await res.json();
 
     lista.innerHTML="";
+
     data.reverse().forEach(f=>{
       lista.innerHTML+=`
-        <div class="feedback">
-          👤 ${f.Atendente || "Não informado"}<br>
-          ⭐ ${f.Nota}<br>
-          ${f.Comentario || ""}
-        </div>`;
+      <div class="feedback">
+        ⭐ ${f.Nota}<br>
+        ${f.Comentario || ""}
+      </div>`;
     });
-  } catch {
+
+  }catch{
     lista.innerHTML="Erro ao carregar";
   }
 }

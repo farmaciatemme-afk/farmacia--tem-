@@ -10,9 +10,10 @@
 
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
+  background: #1abc9c;
 }
 
 /* FUNDO */
@@ -21,126 +22,127 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(26,188,156,0.8), rgba(22,160,133,0.8)),
+    linear-gradient(135deg, rgba(26,188,156,0.85), rgba(22,160,133,0.85)),
     url('logo.png');
   background-size: cover;
-  filter: blur(12px) brightness(0.9);
+  filter: blur(12px);
+  z-index: 0;
 }
 
-/* CONTAINER */
 .container {
   width: 100%;
-  max-width: 480px;
-  margin: auto;
+  max-width: 520px;
   padding: 15px;
-  padding-bottom: 200px;
   position: relative;
   z-index: 1;
 }
 
 /* CARD */
 .card {
-  background: rgba(255,255,255,0.95);
-  border-radius: 24px;
+  background: #fff;
+  border-radius: 25px;
   padding: 22px;
   margin-top: 20px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 /* LOGO */
 .logo {
-  width: 90px;
+  width: 85px;
   display: block;
-  margin: auto;
+  margin: 0 auto;
 }
 
 /* TITULO */
-h2 {
+.titulo {
   text-align: center;
-  font-size: 22px;
 }
 
-/* CAMPOS */
+/* INPUT */
 .field {
-  margin: 12px 0;
+  position: relative;
+  margin-top: 16px;
 }
 
 .field input,
-.field textarea,
-.field select {
+.field select,
+.field textarea {
   width: 100%;
   padding: 15px;
   border-radius: 14px;
-  border: 1px solid #eee;
-  background: #fafafa;
+  border: 1px solid #ddd;
   font-size: 15px;
-}
-
-/* FOCO */
-.field input:focus,
-.field textarea:focus,
-.field select:focus {
-  border-color: #1abc9c;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(26,188,156,0.15);
-  transform: scale(1.02);
 }
 
 /* LABEL */
 .field label {
-  font-size: 13px;
-  margin-left: 5px;
+  position: absolute;
+  left: 12px;
+  top: 13px;
+  color: #999;
+  background: #fff;
+  padding: 0 5px;
+  transition: 0.2s;
+}
+
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label,
+.field select:valid + label,
+.field textarea:focus + label,
+.field textarea:not(:placeholder-shown) + label {
+  top: -8px;
+  font-size: 12px;
+  color: #1abc9c;
 }
 
 /* ESTRELAS */
 .stars {
   text-align: center;
-  font-size: 26px;
+  font-size: 30px;
+  margin-top: 10px;
 }
 
 .star {
-  cursor: pointer;
   color: #ccc;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 /* BOTÃO */
 .big-btn {
   width: 100%;
-  padding: 16px;
-  border-radius: 16px;
-  font-size: 16px;
-  background: #e53935;
-  color: white;
-  border: none;
+  padding: 15px;
   margin-top: 18px;
-  transition: 0.2s;
-}
-
-.big-btn:active {
-  transform: scale(0.96);
+  border: none;
+  border-radius: 14px;
+  background: #e53935;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 /* FEEDBACK */
 .feedback {
-  padding: 14px;
-  border-radius: 14px;
-  margin-top: 10px;
   background: #f9f9f9;
-  border-left: 4px solid #1abc9c;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
-/* WHATS */
+/* WHATSAPP */
 .whats {
   position: fixed;
-  bottom: 18px;
-  right: 18px;
-  width: 62px;
-  height: 62px;
+  bottom: 20px;
+  right: 20px;
+  width: 65px;
+  height: 65px;
   background: #25d366;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
   z-index: 999;
   animation: pulse 2s infinite;
 }
@@ -149,58 +151,40 @@ h2 {
   width: 30px;
 }
 
+/* PULSE */
 @keyframes pulse {
+  0% { transform: scale(1); }
   50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
-/* OVERLAY */
-#overlay {
+/* ANIMAÇÃO ENVIO */
+.overlay {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
 .box {
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  animation: pop 0.3s ease;
 }
 
-.loader {
-  width:40px;
-  height:40px;
-  border:4px solid #ddd;
-  border-top:4px solid #1abc9c;
-  border-radius:50%;
-  animation: spin 1s linear infinite;
-  margin:auto;
-}
-
-@keyframes spin {
-  to { transform:rotate(360deg); }
+@keyframes pop {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 .check {
-  font-size:40px;
-  color:#2ecc71;
-}
-
-/* TOAST */
-.toast {
-  position: fixed;
-  bottom: 90px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 20px;
-  z-index: 9999;
+  font-size: 50px;
+  color: #2ecc71;
 }
 </style>
 </head>
@@ -212,46 +196,49 @@ h2 {
 <div class="card">
 <img src="logo.png" class="logo">
 
+<div class="titulo">
 <h2>Farmácia Tem</h2>
-
-<div class="field">
-<label>Nome do atendente</label>
-<input id="atendente">
+<p>Avalie nosso atendimento</p>
 </div>
 
 <div class="field">
-<label>Atendimento</label>
-<select id="atendimento">
+<input id="atendente" placeholder=" ">
+<label>Nome do atendente</label>
+</div>
+
+<div class="field">
+<select id="atendimento" required>
 <option value="" disabled selected></option>
 <option>Excelente</option>
 <option>Bom</option>
 <option>Regular</option>
 <option>Ruim</option>
 </select>
+<label>Atendimento</label>
 </div>
 
 <div class="field">
-<label>Encontrou?</label>
-<select id="encontrou">
+<select id="encontrou" required>
 <option value="" disabled selected></option>
 <option>Sim</option>
 <option>Não</option>
 </select>
+<label>Encontrou?</label>
 </div>
 
 <div class="field">
+<input id="produto" placeholder=" ">
 <label>Produto</label>
-<input id="produto">
 </div>
 
 <div class="field">
-<label>Voltaria?</label>
-<select id="voltaria">
+<select id="voltaria" required>
 <option value="" disabled selected></option>
 <option>Sim</option>
 <option>Talvez</option>
 <option>Não</option>
 </select>
+<label>Voltaria?</label>
 </div>
 
 <div class="stars">
@@ -263,8 +250,8 @@ h2 {
 </div>
 
 <div class="field">
+<textarea id="comentario" placeholder=" "></textarea>
 <label>Sugestões</label>
-<textarea id="comentario"></textarea>
 </div>
 
 <button class="big-btn" onclick="enviar()">Enviar</button>
@@ -277,18 +264,25 @@ h2 {
 
 </div>
 
-<!-- WHATS -->
-<a href="https://wa.me/5588997428848?text=Olá!%20💊%20Gostaria%20de%20saber%20sobre%20medicamentos%20e%20promoções."
+<!-- BOTÃO WHATS -->
+<a href="https://wa.me/5588997428848?text=Olá!%20💊%20Gostaria%20de%20saber%20sobre%20medicamentos%20e%20promoções.%20Pode%20me%20ajudar?"
 class="whats" target="_blank">
 <img src="whatsapp.png">
 </a>
+
+<!-- ANIMAÇÃO -->
+<div class="overlay" id="overlay">
+<div class="box">
+<div class="check">✔</div>
+<p>Enviado com sucesso!</p>
+</div>
+</div>
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfSgJveiEcP522pr5nLCHfRJdLjYzc0t70KhsJn9UmAP1q-OOWabTornfnhhFa43Ox/exec";
 const URL = "https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
 let nota = 0;
-
 document.querySelectorAll(".star").forEach((s,i)=>{
   s.onclick=()=>{
     nota=i+1;
@@ -298,72 +292,39 @@ document.querySelectorAll(".star").forEach((s,i)=>{
 
 function enviar(){
 
-  const tempoBloqueio = 10 * 60 * 1000;
-  const ultimoEnvio = localStorage.getItem("ultimoEnvio");
+  let ultimo = localStorage.getItem("tempo");
+  let agora = Date.now();
 
-  if (ultimoEnvio && (Date.now() - ultimoEnvio < tempoBloqueio)) {
-    let restante = Math.ceil((tempoBloqueio - (Date.now() - ultimoEnvio)) / 60000);
-    mostrarMensagem(`⏳ Aguarde ${restante} min`);
+  if(ultimo && (agora - ultimo < 600000)){
+    alert("Espere 10 minutos para avaliar novamente.");
     return;
   }
 
-  if(nota === 0){
-    mostrarMensagem("⚠️ Dê uma nota");
-    return;
-  }
-
-  mostrarLoading();
+  let data = {
+    atendente: document.getElementById("atendente").value,
+    atendimento: document.getElementById("atendimento").value,
+    encontrou: document.getElementById("encontrou").value,
+    produto: document.getElementById("produto").value,
+    voltaria: document.getElementById("voltaria").value,
+    nota: nota,
+    comentario: document.getElementById("comentario").value
+  };
 
   fetch(SCRIPT_URL,{
     method:"POST",
-    body:JSON.stringify({
-      nota,
-      comentario: document.getElementById("comentario").value
-    })
+    body: JSON.stringify(data)
   })
   .then(()=>{
-    localStorage.setItem("ultimoEnvio", Date.now());
-    mostrarSucesso();
+    localStorage.setItem("tempo", agora);
+
+    document.getElementById("overlay").style.display="flex";
+
     setTimeout(()=>location.reload(),2000);
   })
-  .catch(()=>{
-    mostrarMensagem("Erro ao enviar");
-  });
+  .catch(()=>alert("Erro ao enviar"));
 }
 
-/* ANIMAÇÕES */
-function mostrarLoading(){
-  let div = document.createElement("div");
-  div.id = "overlay";
-  div.innerHTML = `
-    <div class="box">
-      <div class="loader"></div>
-      <p>Enviando...</p>
-    </div>`;
-  document.body.appendChild(div);
-}
-
-function mostrarSucesso(){
-  let overlay = document.getElementById("overlay");
-  overlay.innerHTML = `
-    <div class="box">
-      <div class="check">✔</div>
-      <p>Enviado!</p>
-    </div>`;
-}
-
-function mostrarMensagem(msg){
-  let div = document.createElement("div");
-  div.className = "toast";
-  div.innerText = msg;
-  document.body.appendChild(div);
-  setTimeout(()=>div.remove(),3000);
-}
-
-/* FEEDBACK */
 async function carregar(){
-  let lista = document.getElementById("lista");
-
   try{
     let res = await fetch(URL);
     let data = await res.json();
@@ -373,6 +334,7 @@ async function carregar(){
     data.reverse().forEach(f=>{
       lista.innerHTML+=`
       <div class="feedback">
+        ${f.Atendente ? "👤 " + f.Atendente + "<br>" : ""}
         ⭐ ${f.Nota}<br>
         ${f.Comentario || ""}
       </div>`;

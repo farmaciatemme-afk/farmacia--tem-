@@ -21,31 +21,41 @@ background:#fff;
 .logo{height:50px}
 .nav a{text-decoration:none;color:#333;margin-left:20px}
 
-/* HERO (AGORA COM IMAGEM NO FUNDO) */
+/* HERO (IMAGEM 100% FUNDO) */
 .hero{
 display:flex;
-justify-content:space-between;
-align-items:center;
-padding:60px;
+flex-direction:column;
+justify-content:center;
+align-items:flex-start;
+text-align:left;
+padding:80px 60px;
+min-height:420px;
 
-/* IMAGEM + FUNDO VERDE */
+/* IMAGEM FULL + ESCURECIMENTO */
 background:
-linear-gradient(to right, rgba(15,118,110,0.9), rgba(15,118,110,0.4)),
-url('banner.png') right center no-repeat;
+linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)),
+url('banner.png') center center no-repeat;
 
-background-size: contain;
-background-color:#0f766e;
+background-size:cover;
 
 border-radius:20px;
 margin:20px;
-flex-wrap:wrap;
 color:#fff;
 }
 
-.hero-text{max-width:500px}
-.hero h1{font-size:48px;font-weight:700;color:#fff}
-.hero span{color:#bbf7d0}
-.hero p{margin:20px 0;color:#e6fffa;font-size:18px}
+.hero h1{
+font-size:48px;
+font-weight:700;
+color:#fff;
+}
+
+.hero span{color:#4ade80}
+
+.hero p{
+margin:20px 0;
+color:#eee;
+font-size:18px;
+}
 
 .btn{
 padding:14px 22px;
@@ -56,9 +66,9 @@ font-weight:600;
 }
 
 .btn-green{
-background:#fff;
-color:#0f766e;
-box-shadow:0 8px 20px rgba(0,0,0,0.2);
+background:#22c55e;
+color:#fff;
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
 
 /* SECTION */
@@ -136,10 +146,9 @@ box-shadow:0 5px 15px rgba(0,0,0,0.2);
 /* RESPONSIVO */
 @media(max-width:768px){
 .hero{
-flex-direction:column;
+padding:60px 20px;
 text-align:center;
-background-position:center;
-background-size:cover;
+align-items:center;
 }
 
 .hero h1{font-size:32px}
@@ -162,8 +171,8 @@ background-size:cover;
 
 <!-- HERO -->
 <div class="hero">
-<div class="hero-text">
 <h1>Sua saúde em primeiro lugar, <span>sempre</span>.</h1>
+
 <p>Medicamentos de qualidade, atendimento humanizado e os melhores preços da região.</p>
 
 <button class="btn btn-green" onclick="window.location.href='https://wa.me/5588997428848'">
@@ -173,7 +182,6 @@ Falar no WhatsApp
 <p style="margin-top:15px;font-size:14px;">
 ✔ Medicamentos originais • ✔ Entrega rápida • ✔ Promoções • ✔ Atendimento humanizado
 </p>
-</div>
 </div>
 
 <!-- SERVIÇOS -->

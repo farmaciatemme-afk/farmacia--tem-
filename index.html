@@ -2,173 +2,154 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Farmácia Tem</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 
-body{
-  font-family:Arial;
-  background:linear-gradient(135deg,#1abc9c,#16a085);
-  display:flex;
-  justify-content:center;
+/* NAV */
+.nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 25px;
+background:#fff;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
+.logo{height:45px;}
+.menu a{margin:0 10px;text-decoration:none;color:#333;font-weight:bold}
+.btn{background:#1abc9c;color:#fff;padding:10px 15px;border-radius:10px}
 
-/* CONTAINER */
+/* HERO */
+.hero{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:50px 20px;
+background:linear-gradient(135deg,#1abc9c,#16a085);
+color:#fff;
+flex-wrap:wrap;
+}
+.hero-text{max-width:500px}
+.hero h1{font-size:36px}
+.hero p{margin:10px 0}
+.hero img{width:250px;border-radius:50%;border:5px solid #fff}
+
+/* FORM */
 .container{
-  width:100%;
-  max-width:420px;
-  padding:20px;
+max-width:420px;
+margin:20px auto;
+padding:10px;
 }
-
-/* CARD */
 .card{
-  background:#fff;
-  border-radius:25px;
-  padding:22px;
-  margin-top:20px;
-  box-shadow:0 15px 35px rgba(0,0,0,.2);
-  animation:fade 0.5s ease;
+background:#fff;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+.field{margin:10px 0}
+.field input,.field select,.field textarea{
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #ddd;
 }
 
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1}
-}
-
-/* LOGO */
-.logo{
-  width:120px;
-  display:block;
-  margin:0 auto 10px;
-  animation:float 2.5s infinite ease-in-out;
-}
-
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
-}
-
-/* TITULO */
-h2{text-align:center;margin-bottom:5px}
-p{text-align:center;color:#666;margin-bottom:15px}
-
-/* CAMPOS */
-.field{margin:12px 0}
-
-.field input,
-.field select,
-.field textarea{
-  width:100%;
-  padding:15px;
-  border-radius:14px;
-  border:1px solid #ddd;
-  font-size:15px;
-}
-
-/* ESTRELAS */
-.stars{
-  text-align:center;
-  font-size:30px;
-  margin:10px 0;
-}
-
-.star{
-  color:#ccc;
-  cursor:pointer;
-  transition:.2s;
-}
+/* STARS */
+.stars{text-align:center;font-size:28px}
+.star{cursor:pointer;color:#ccc}
 
 /* BOTÃO */
 .big-btn{
-  width:100%;
-  padding:16px;
-  border:none;
-  border-radius:14px;
-  background:#e53935;
-  color:#fff;
-  font-weight:bold;
-  font-size:16px;
-  margin-top:10px;
-  transition:.3s;
-}
-
-.big-btn:hover{
-  transform:scale(1.03);
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#e53935;
+color:#fff;
+margin-top:10px;
 }
 
 /* FEEDBACK */
 .feedback{
-  background:#f4f4f4;
-  padding:12px;
-  border-radius:12px;
-  margin-top:10px;
-  font-size:14px;
+background:#f2f2f2;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
 }
 
 /* WHATS */
 .whats{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:70px;
-  height:70px;
-  background:#25d366;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
-  animation:pulse 1.4s infinite;
+position:fixed;
+bottom:20px;
+right:20px;
+width:65px;
+height:65px;
+background:#25d366;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+animation:pulse 1.5s infinite;
 }
-
+.whats img{width:30px}
 @keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.1)}
-  100%{transform:scale(1)}
+0%{transform:scale(1)}
+50%{transform:scale(1.1)}
+100%{transform:scale(1)}
 }
-
-.whats img{width:35px}
 
 /* OVERLAY */
 .overlay{
-  position:fixed;
-  inset:0;
-  background:#fff;
-  display:none;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
+position:fixed;
+inset:0;
+background:#fff;
+display:none;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:999;
 }
-
 .loader{
-  width:60px;
-  height:60px;
-  border:6px solid #eee;
-  border-top:6px solid #1abc9c;
-  border-radius:50%;
-  animation:spin 1s linear infinite;
+width:60px;
+height:60px;
+border:6px solid #eee;
+border-top:6px solid #1abc9c;
+border-radius:50%;
+animation:spin 1s linear infinite;
 }
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
+<div class="nav">
+<img src="logo.png" class="logo">
+<div class="menu">
+<a>Início</a>
+<a>Serviços</a>
+<a>Promoções</a>
+</div>
+<a href="https://wa.me/5588997428848" class="btn">WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+<div class="hero-text">
+<h1>Sua saúde em primeiro lugar</h1>
+<p>Atendimento rápido e medicamentos de qualidade</p>
+</div>
+<img src="logo.png">
+</div>
+
+<!-- FORM -->
 <div class="container">
 
 <div class="card">
-
-<img src="logo.png" class="logo">
-
-<h2>Farmácia Tem</h2>
-<p>Avalie nosso atendimento</p>
+<h2>Avaliação</h2>
 
 <div class="field">
 <input id="atendente" placeholder="Nome do atendente">
@@ -184,27 +165,6 @@ p{text-align:center;color:#666;margin-bottom:15px}
 </select>
 </div>
 
-<div class="field">
-<select id="encontrou">
-<option value="">Encontrou?</option>
-<option>Sim</option>
-<option>Não</option>
-</select>
-</div>
-
-<div class="field">
-<input id="produto" placeholder="Produto">
-</div>
-
-<div class="field">
-<select id="voltaria">
-<option value="">Voltaria?</option>
-<option>Sim</option>
-<option>Talvez</option>
-<option>Não</option>
-</select>
-</div>
-
 <div class="stars">
 <span class="star">★</span>
 <span class="star">★</span>
@@ -213,100 +173,78 @@ p{text-align:center;color:#666;margin-bottom:15px}
 <span class="star">★</span>
 </div>
 
-<div class="field">
-<textarea id="comentario" placeholder="Sugestões"></textarea>
-</div>
-
-<button class="big-btn" onclick="enviar()">Enviar avaliação</button>
+<button class="big-btn" onclick="enviar()">Enviar</button>
 
 </div>
 
 <div class="card">
 <h3>Feedback (<span id="total">0</span>)</h3>
-<div id="lista">Carregando...</div>
+<div id="lista"></div>
 </div>
 
 </div>
 
-<a href="https://wa.me/5588997428848" class="whats" target="_blank">
+<!-- WHATS -->
+<a href="https://wa.me/5588997428848" class="whats">
 <img src="whatsapp.png">
 </a>
 
+<!-- OVERLAY -->
 <div class="overlay" id="overlay">
 <div class="loader"></div>
-<p style="margin-top:10px">Enviando...</p>
+<p>Enviando...</p>
 </div>
 
 <script>
 
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbx0TtRNqQYFQa_uUC7QwkWEURw31deDCIcbb6iaNzjAEcetpT3OYTOU9R8QxsyevjXZ/exec";
-const GOOGLE="https://g.page/r/Cewsxt13lIojEAE/review";
+const URL="https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
 let nota=0;
 
+/* estrelas */
 document.querySelectorAll(".star").forEach((s,i)=>{
-  s.onclick=()=>{
-    nota=i+1;
-    document.querySelectorAll(".star").forEach((e,j)=>e.style.color=j<nota?"gold":"#ccc");
-  };
+s.onclick=()=>{
+nota=i+1;
+document.querySelectorAll(".star").forEach((e,j)=>e.style.color=j<nota?"gold":"#ccc");
+};
 });
 
+/* enviar */
 function enviar(){
-
-if(!atendente.value || !atendimento.value || !encontrou.value || !voltaria.value || nota===0){
-  alert("Preencha tudo!");
-  return;
-}
 
 let ultimo=localStorage.getItem("tempo");
 let agora=Date.now();
 
 if(ultimo && agora-ultimo<600000){
-  alert("Aguarde 10 minutos");
-  return;
+alert("Aguarde 10 minutos");
+return;
 }
 
 overlay.style.display="flex";
 
 fetch(SCRIPT_URL,{
-  method:"POST",
-  body:JSON.stringify({
-    atendente:atendente.value,
-    atendimento:atendimento.value,
-    encontrou:encontrou.value,
-    produto:produto.value,
-    voltaria:voltaria.value,
-    nota:nota,
-    comentario:comentario.value
-  })
+method:"POST",
+body:JSON.stringify({nota:nota})
 })
 .then(()=>{
-  localStorage.setItem("tempo",agora);
-  setTimeout(()=>{
-    window.location.href=GOOGLE;
-  },1500);
-})
-.catch(()=>{
-  alert("Erro");
+localStorage.setItem("tempo",agora);
+setTimeout(()=>location.reload(),1500);
 });
 }
 
+/* feedback automático */
 async function carregar(){
-  let res=await fetch("https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1");
-  let data=await res.json();
+let res=await fetch(URL);
+let data=await res.json();
 
-  lista.innerHTML="";
-  total.innerText=data.length;
+lista.innerHTML="";
+total.innerText=data.length;
 
-  data.reverse().forEach(f=>{
-    if(!f.Nota) return;
-
-    lista.innerHTML+=`
-    <div class="feedback">
-      ⭐ ${f.Nota}<br>
-      ${f.Comentario||""}
-    </div>`;
-  });
+data.reverse().forEach(f=>{
+if(!f.Nota)return;
+lista.innerHTML+=`<div class="feedback">⭐ ${f.Nota}</div>`;
+});
 }
 
 setInterval(carregar,5000);

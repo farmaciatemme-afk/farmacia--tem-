@@ -21,28 +21,31 @@ background:#fff;
 .logo{height:50px}
 .nav a{text-decoration:none;color:#333;margin-left:20px}
 
-/* HERO */
+/* HERO (AGORA COM IMAGEM NO FUNDO) */
 .hero{
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:60px;
-background:linear-gradient(120deg,#e6f7f5 40%, #ffffff 100%);
+
+/* IMAGEM + FUNDO VERDE */
+background:
+linear-gradient(to right, rgba(15,118,110,0.9), rgba(15,118,110,0.4)),
+url('banner.png') right center no-repeat;
+
+background-size: contain;
+background-color:#0f766e;
+
 border-radius:20px;
 margin:20px;
 flex-wrap:wrap;
+color:#fff;
 }
 
 .hero-text{max-width:500px}
-.hero h1{font-size:48px;font-weight:700}
-.hero span{color:#0f766e}
-.hero p{margin:20px 0;color:#555;font-size:18px}
-
-.hero-img{
-width:350px;
-border-radius:20px;
-box-shadow:0 20px 50px rgba(0,0,0,.15);
-}
+.hero h1{font-size:48px;font-weight:700;color:#fff}
+.hero span{color:#bbf7d0}
+.hero p{margin:20px 0;color:#e6fffa;font-size:18px}
 
 .btn{
 padding:14px 22px;
@@ -53,12 +56,12 @@ font-weight:600;
 }
 
 .btn-green{
-background:#0f766e;
-color:#fff;
-box-shadow:0 8px 20px rgba(15,118,110,0.3);
+background:#fff;
+color:#0f766e;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
-/* SECTION (CORRIGIDO) */
+/* SECTION */
 .section{
 padding:60px 40px 40px;
 text-align:center;
@@ -132,8 +135,13 @@ box-shadow:0 5px 15px rgba(0,0,0,0.2);
 
 /* RESPONSIVO */
 @media(max-width:768px){
-.hero{flex-direction:column;text-align:center}
-.hero-img{margin-top:30px;width:100%}
+.hero{
+flex-direction:column;
+text-align:center;
+background-position:center;
+background-size:cover;
+}
+
 .hero h1{font-size:32px}
 }
 </style>
@@ -162,12 +170,10 @@ box-shadow:0 5px 15px rgba(0,0,0,0.2);
 Falar no WhatsApp
 </button>
 
-<p style="margin-top:15px;font-size:14px;color:#555;">
+<p style="margin-top:15px;font-size:14px;">
 ✔ Medicamentos originais • ✔ Entrega rápida • ✔ Promoções • ✔ Atendimento humanizado
 </p>
 </div>
-
-<img src="banner.png" class="hero-img">
 </div>
 
 <!-- SERVIÇOS -->

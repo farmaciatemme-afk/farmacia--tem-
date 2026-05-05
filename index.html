@@ -6,6 +6,13 @@
 <title>Farmácia Tem</title>
 
 <style>
+
+:root{
+  --verde:#1abc9c;
+  --verde2:#16a085;
+  --vermelho:#e53935;
+}
+
 *{box-sizing:border-box}
 
 body{
@@ -14,65 +21,140 @@ body{
   background:#f5f7fa;
 }
 
-/* HEADER PREMIUM */
-.header{
-  background:linear-gradient(135deg,#1abc9c,#16a085);
-  color:#fff;
+/* TOPO */
+.topo{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.logo-topo{width:130px;}
+
+nav a{
+  margin:0 12px;
+  text-decoration:none;
+  color:#333;
+  font-weight:bold;
+}
+
+.btn-whats{
+  background:#25d366;
+  color:white;
+  padding:10px 16px;
+  border-radius:12px;
+}
+
+/* HERO */
+.hero{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:50px;
+  background:linear-gradient(135deg,var(--verde),var(--verde2));
+  color:white;
+}
+
+.hero-texto{
+  max-width:500px;
+}
+
+.hero-texto span{
+  color:#ffdede;
+  font-weight:bold;
+}
+
+.hero-texto h1{
+  font-size:42px;
+  margin:10px 0;
+}
+
+.hero-logo img{
+  width:320px;
+  border-radius:50%;
+  border:6px solid white;
+}
+
+/* BOTÕES */
+.btn{
+  background:#25d366;
+  padding:12px 18px;
+  border-radius:12px;
+  color:white;
+  text-decoration:none;
+  display:inline-block;
+}
+
+.btn-outline{
+  border:2px solid white;
+  padding:10px 15px;
+  border-radius:12px;
+  margin-left:10px;
+  color:white;
+  text-decoration:none;
+}
+
+/* CARDS */
+.vantagens{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  padding:40px;
+}
+
+.card-vantagem{
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  width:230px;
   text-align:center;
-  padding:40px 20px 80px;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
-.logo{
-  width:120px;
-  animation:float 3s ease-in-out infinite;
-}
-
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
-  100%{transform:translateY(0)}
-}
-
-.header h1{margin:10px 0 5px}
-.header p{opacity:.9}
-
-/* CARD */
+/* FORM */
 .container{
-  max-width:420px;
-  margin:-60px auto 20px;
-  padding:10px;
+  max-width:450px;
+  margin:30px auto;
 }
 
 .card{
-  background:#fff;
+  background:white;
+  padding:25px;
   border-radius:20px;
-  padding:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
-/* CAMPOS */
-.field{margin:12px 0}
+.field{margin:12px 0;}
+
 .field input,
 .field select,
 .field textarea{
   width:100%;
-  padding:15px;
-  border-radius:12px;
+  padding:16px;
+  border-radius:14px;
   border:1px solid #ddd;
 }
 
 /* ESTRELAS */
-.stars{text-align:center;font-size:30px}
-.star{color:#ccc;cursor:pointer}
+.stars{
+  text-align:center;
+  font-size:30px;
+}
+.star{
+  color:#ccc;
+  cursor:pointer;
+}
 
 /* BOTÃO */
 .big-btn{
   width:100%;
-  padding:15px;
+  padding:16px;
   border:none;
-  border-radius:12px;
-  background:#e53935;
-  color:#fff;
+  border-radius:14px;
+  background:var(--vermelho);
+  color:white;
   font-weight:bold;
 }
 
@@ -89,15 +171,16 @@ body{
   position:fixed;
   bottom:20px;
   right:20px;
-  width:65px;
-  height:65px;
+  width:70px;
+  height:70px;
   background:#25d366;
   border-radius:50%;
   display:flex;
-  align-items:center;
   justify-content:center;
-  animation:pulse 1.5s infinite;
+  align-items:center;
+  animation:pulse 1.4s infinite;
 }
+.whats img{width:34px;}
 
 @keyframes pulse{
   0%{transform:scale(1)}
@@ -105,46 +188,89 @@ body{
   100%{transform:scale(1)}
 }
 
-.whats img{width:30px}
-
 /* LOADING */
 .overlay{
   position:fixed;
   inset:0;
-  background:#fff;
+  background:white;
   display:none;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   flex-direction:column;
-  z-index:999;
 }
 
 .loader{
   width:60px;
   height:60px;
   border:6px solid #eee;
-  border-top:6px solid #1abc9c;
+  border-top:6px solid var(--verde);
   border-radius:50%;
   animation:spin 1s linear infinite;
 }
 
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* MOBILE */
+@media(max-width:768px){
+.hero{
+  flex-direction:column;
+  text-align:center;
+}
+.hero-logo img{
+  width:200px;
+  margin-top:20px;
+}
+.vantagens{
+  flex-direction:column;
+  align-items:center;
+}
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
-<img src="logo.png" class="logo">
-<h1>Farmácia Tem</h1>
-<p>Sua opinião é muito importante</p>
+<header class="topo">
+<img src="logo.png" class="logo-topo">
+
+<nav>
+<a>Início</a>
+<a>Serviços</a>
+<a>Promoções</a>
+<a>Contato</a>
+</nav>
+
+<a href="https://wa.me/5588997428848" class="btn-whats">WhatsApp</a>
+</header>
+
+<section class="hero">
+
+<div class="hero-texto">
+<span>CUIDADO QUE VOCÊ MERECE</span>
+<h1>Sua saúde em primeiro lugar</h1>
+<p>Atendimento humanizado e preços acessíveis</p>
+
+<a href="https://wa.me/5588997428848" class="btn">Falar no WhatsApp</a>
+<a class="btn-outline">Ver serviços</a>
 </div>
+
+<div class="hero-logo">
+<img src="logo.png">
+</div>
+
+</section>
+
+<section class="vantagens">
+<div class="card-vantagem">Qualidade Garantida</div>
+<div class="card-vantagem">Entrega Rápida</div>
+<div class="card-vantagem">Promoções Diárias</div>
+</section>
 
 <div class="container">
 
 <div class="card">
+<h2>Avaliação</h2>
 
 <div class="field">
 <input id="atendente" placeholder="Nome do atendente">
@@ -160,27 +286,6 @@ body{
 </select>
 </div>
 
-<div class="field">
-<select id="encontrou">
-<option value="">Encontrou?</option>
-<option>Sim</option>
-<option>Não</option>
-</select>
-</div>
-
-<div class="field">
-<input id="produto" placeholder="Produto">
-</div>
-
-<div class="field">
-<select id="voltaria">
-<option value="">Voltaria?</option>
-<option>Sim</option>
-<option>Talvez</option>
-<option>Não</option>
-</select>
-</div>
-
 <div class="stars">
 <span class="star">★</span>
 <span class="star">★</span>
@@ -189,27 +294,20 @@ body{
 <span class="star">★</span>
 </div>
 
-<div class="field">
-<textarea id="comentario" placeholder="Sugestões"></textarea>
-</div>
-
-<button class="big-btn" onclick="enviar()">Enviar avaliação</button>
-
+<button class="big-btn" onclick="enviar()">Enviar</button>
 </div>
 
 <div class="card">
 <h3>Feedback (<span id="total">0</span>)</h3>
-<div id="lista">Carregando...</div>
+<div id="lista"></div>
 </div>
 
 </div>
 
-<!-- WHATS -->
-<a href="https://wa.me/5588997428848" class="whats" target="_blank">
+<a href="https://wa.me/5588997428848" class="whats">
 <img src="whatsapp.png">
 </a>
 
-<!-- LOADING -->
 <div class="overlay" id="overlay">
 <div class="loader"></div>
 <p>Enviando...</p>
@@ -232,58 +330,37 @@ document.querySelectorAll(".star").forEach((s,i)=>{
 
 function enviar(){
 
-  if(!atendente.value || !atendimento.value || !encontrou.value || !voltaria.value || nota===0){
-    alert("Preencha tudo!");
-    return;
-  }
+let ultimo=localStorage.getItem("tempo");
+let agora=Date.now();
 
-  let ultimo=localStorage.getItem("tempo");
-  let agora=Date.now();
+if(ultimo && agora-ultimo<600000){
+alert("Espere 10 minutos para avaliar novamente");
+return;
+}
 
-  if(ultimo && agora-ultimo<600000){
-    alert("Aguarde 10 minutos");
-    return;
-  }
+overlay.style.display="flex";
 
-  overlay.style.display="flex";
-
-  fetch(SCRIPT_URL,{
-    method:"POST",
-    body:JSON.stringify({
-      atendente:atendente.value,
-      atendimento:atendimento.value,
-      encontrou:encontrou.value,
-      produto:produto.value,
-      voltaria:voltaria.value,
-      nota:nota,
-      comentario:comentario.value
-    })
-  })
-  .then(()=>{
-    localStorage.setItem("tempo",agora);
-
-    setTimeout(()=>{
-      window.location.href=GOOGLE_REVIEW;
-    },1500);
-  });
+fetch(SCRIPT_URL,{
+method:"POST",
+body:JSON.stringify({nota:nota})
+})
+.then(()=>{
+localStorage.setItem("tempo",agora);
+setTimeout(()=>window.location.href=GOOGLE_REVIEW,1500);
+});
 }
 
 async function carregar(){
-  let res=await fetch(URL);
-  let data=await res.json();
+let res=await fetch(URL);
+let data=await res.json();
 
-  lista.innerHTML="";
-  total.innerText=data.length;
+lista.innerHTML="";
+total.innerText=data.length;
 
-  data.reverse().forEach(f=>{
-    if(!f.Nota) return;
-
-    lista.innerHTML+=`
-    <div class="feedback">
-      ⭐ ${f.Nota}<br>
-      ${f.Comentario||""}
-    </div>`;
-  });
+data.reverse().forEach(f=>{
+if(!f.Nota)return;
+lista.innerHTML+=`<div class="feedback">⭐ ${f.Nota}</div>`;
+});
 }
 
 setInterval(carregar,5000);

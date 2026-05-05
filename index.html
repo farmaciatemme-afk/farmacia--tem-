@@ -6,69 +6,83 @@
 <title>Farmácia Tem</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+
+body{background:#f8f9fa;color:#222}
 
 /* NAV */
 .nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 25px;
+padding:20px 40px;
 background:#fff;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
-.logo{height:45px;}
-.menu a{margin:0 10px;text-decoration:none;color:#333;font-weight:bold}
-.btn{background:#1abc9c;color:#fff;padding:10px 15px;border-radius:10px}
+.logo{height:50px}
+.nav a{text-decoration:none;color:#333;margin-left:20px}
 
 /* HERO */
 .hero{
+padding:100px 40px;
 display:flex;
-align-items:center;
 justify-content:space-between;
-padding:50px 20px;
-background:linear-gradient(135deg,#1abc9c,#16a085);
-color:#fff;
+align-items:center;
 flex-wrap:wrap;
 }
 .hero-text{max-width:500px}
-.hero h1{font-size:36px}
-.hero p{margin:10px 0}
-.hero img{width:250px;border-radius:50%;border:5px solid #fff}
-
-/* FORM */
-.container{
-max-width:420px;
-margin:20px auto;
-padding:10px;
+.hero h1{font-size:48px}
+.hero span{color:#1abc9c}
+.hero p{margin:20px 0;color:#555}
+.hero button{
+padding:14px 22px;
+background:#1abc9c;
+border:none;
+color:#fff;
+border-radius:8px;
 }
+.hero img{width:260px}
+
+/* SECTION */
+.section{padding:80px 40px}
+.cards{display:flex;gap:20px;flex-wrap:wrap}
 .card{
 background:#fff;
-padding:20px;
-border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.1);
+padding:25px;
+border-radius:12px;
+width:260px;
+box-shadow:0 10px 20px rgba(0,0,0,.05);
 }
-.field{margin:10px 0}
-.field input,.field select,.field textarea{
+
+/* FORM */
+.form{
+background:#fff;
+padding:30px;
+border-radius:15px;
+max-width:420px;
+margin:auto;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.form input,.form select,.form textarea{
 width:100%;
 padding:14px;
-border-radius:12px;
+margin-bottom:10px;
+border-radius:10px;
 border:1px solid #ddd;
 }
 
 /* STARS */
-.stars{text-align:center;font-size:28px}
+.stars{text-align:center;font-size:26px}
 .star{cursor:pointer;color:#ccc}
 
 /* BOTÃO */
-.big-btn{
+.form button{
 width:100%;
-padding:15px;
-border:none;
-border-radius:12px;
+padding:14px;
 background:#e53935;
+border:none;
 color:#fff;
-margin-top:10px;
+border-radius:10px;
 }
 
 /* FEEDBACK */
@@ -77,6 +91,14 @@ background:#f2f2f2;
 padding:10px;
 border-radius:10px;
 margin-top:10px;
+}
+
+/* CTA */
+.cta{
+background:#1abc9c;
+color:#fff;
+padding:60px;
+text-align:center;
 }
 
 /* WHATS */
@@ -89,11 +111,12 @@ height:65px;
 background:#25d366;
 border-radius:50%;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 animation:pulse 1.5s infinite;
 }
 .whats img{width:30px}
+
 @keyframes pulse{
 0%{transform:scale(1)}
 50%{transform:scale(1.1)}
@@ -106,8 +129,8 @@ position:fixed;
 inset:0;
 background:#fff;
 display:none;
-align-items:center;
 justify-content:center;
+align-items:center;
 flex-direction:column;
 z-index:999;
 }
@@ -120,6 +143,11 @@ border-radius:50%;
 animation:spin 1s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:768px){
+.hero{flex-direction:column;text-align:center}
+.hero img{margin-top:30px}
+}
 </style>
 </head>
 
@@ -128,34 +156,43 @@ animation:spin 1s linear infinite;
 <!-- NAV -->
 <div class="nav">
 <img src="logo.png" class="logo">
-<div class="menu">
-<a>Início</a>
-<a>Serviços</a>
-<a>Promoções</a>
+<div>
+<a href="#">Início</a>
+<a href="#">Serviços</a>
+<a href="#">Contato</a>
 </div>
-<a href="https://wa.me/5588997428848" class="btn">WhatsApp</a>
 </div>
 
 <!-- HERO -->
 <div class="hero">
 <div class="hero-text">
-<h1>Sua saúde em primeiro lugar</h1>
-<p>Atendimento rápido e medicamentos de qualidade</p>
+<h1>Sua saúde é nossa <span>prioridade</span></h1>
+<p>Atendimento de qualidade e entrega rápida.</p>
+<button onclick="window.location.href='https://wa.me/5588997428848'">
+Falar no WhatsApp
+</button>
 </div>
 <img src="logo.png">
 </div>
 
-<!-- FORM -->
-<div class="container">
-
-<div class="card">
-<h2>Avaliação</h2>
-
-<div class="field">
-<input id="atendente" placeholder="Nome do atendente">
+<!-- SERVIÇOS -->
+<div class="section">
+<h2>Serviços</h2>
+<div class="cards">
+<div class="card">💊 Medicamentos confiáveis</div>
+<div class="card">🚚 Entrega rápida</div>
+<div class="card">👨‍⚕️ Atendimento humanizado</div>
+</div>
 </div>
 
-<div class="field">
+<!-- AVALIAÇÃO -->
+<div class="section">
+<h2>Avalie nosso atendimento</h2>
+
+<div class="form">
+
+<input id="atendente" placeholder="Nome do atendente">
+
 <select id="atendimento">
 <option value="">Atendimento</option>
 <option>Excelente</option>
@@ -163,7 +200,6 @@ animation:spin 1s linear infinite;
 <option>Regular</option>
 <option>Ruim</option>
 </select>
-</div>
 
 <div class="stars">
 <span class="star">★</span>
@@ -173,15 +209,23 @@ animation:spin 1s linear infinite;
 <span class="star">★</span>
 </div>
 
-<button class="big-btn" onclick="enviar()">Enviar</button>
+<textarea id="comentario" placeholder="Comentário"></textarea>
+
+<button onclick="enviar()">Enviar avaliação</button>
 
 </div>
 
-<div class="card">
+<div class="form" style="margin-top:20px">
 <h3>Feedback (<span id="total">0</span>)</h3>
-<div id="lista"></div>
+<div id="lista">Carregando...</div>
 </div>
 
+</div>
+
+<!-- CTA -->
+<div class="cta">
+<h2>Precisa de ajuda?</h2>
+<p>Fale conosco no WhatsApp</p>
 </div>
 
 <!-- WHATS -->
@@ -189,7 +233,7 @@ animation:spin 1s linear infinite;
 <img src="whatsapp.png">
 </a>
 
-<!-- OVERLAY -->
+<!-- LOADING -->
 <div class="overlay" id="overlay">
 <div class="loader"></div>
 <p>Enviando...</p>
@@ -213,6 +257,11 @@ document.querySelectorAll(".star").forEach((e,j)=>e.style.color=j<nota?"gold":"#
 /* enviar */
 function enviar(){
 
+if(nota===0){
+alert("Escolha uma nota");
+return;
+}
+
 let ultimo=localStorage.getItem("tempo");
 let agora=Date.now();
 
@@ -225,7 +274,12 @@ overlay.style.display="flex";
 
 fetch(SCRIPT_URL,{
 method:"POST",
-body:JSON.stringify({nota:nota})
+body:JSON.stringify({
+atendente:atendente.value,
+atendimento:atendimento.value,
+nota:nota,
+comentario:comentario.value
+})
 })
 .then(()=>{
 localStorage.setItem("tempo",agora);
@@ -243,7 +297,12 @@ total.innerText=data.length;
 
 data.reverse().forEach(f=>{
 if(!f.Nota)return;
-lista.innerHTML+=`<div class="feedback">⭐ ${f.Nota}</div>`;
+
+lista.innerHTML+=`
+<div class="feedback">
+⭐ ${f.Nota}<br>
+${f.Comentario||""}
+</div>`;
 });
 }
 

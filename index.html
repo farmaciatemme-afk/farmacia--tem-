@@ -10,42 +10,99 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
 body{background:#f8fafc;color:#1f2937}
+
 .container{max-width:1200px;margin:auto;padding:0 20px}
 
 /* NAV */
 .nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;background:#fff}
-.logo{height:50px}
-.nav a{text-decoration:none;color:#374151;margin-left:20px}
+.nav a{margin-left:20px;text-decoration:none;color:#374151}
 
 /* HERO */
 .hero{background:linear-gradient(to right,#ecfeff,#fff);padding:80px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-.hero-text{max-width:500px}
-.hero h1{font-size:48px}
+.hero-text{max-width:520px}
+.hero h1{font-size:48px;line-height:1.2}
 .hero span{color:#0f766e}
-.hero p{margin:20px 0}
-.hero button{padding:14px 24px;background:#0f766e;color:#fff;border:none;border-radius:10px}
+.hero p{margin:20px 0;color:#6b7280}
+
+.btn{padding:14px 22px;border-radius:10px;border:none;cursor:pointer}
+.btn-green{background:#0f766e;color:#fff}
+.btn-outline{border:2px solid #0f766e;color:#0f766e;background:#fff;margin-left:10px}
+
+/* BADGES */
+.badges{margin-top:20px;font-size:14px;color:#555}
 
 /* CARDS */
 .section{padding:80px 0;text-align:center}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}
-.card{background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:30px}
 
-/* FORM */
-.form{background:#fff;padding:30px;border-radius:20px;max-width:450px;margin:40px auto;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-.form input,.form select,.form textarea{width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd}
-.form button{width:100%;padding:14px;background:#ef4444;color:#fff;border:none;border-radius:10px}
+.card{
+background:#fff;
+padding:20px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,.06);
+transition:.3s;
+}
+.card img{width:100%;border-radius:12px;margin-bottom:10px}
+.card:hover{transform:translateY(-5px)}
 
-/* CTA */
-.cta{background:#0f766e;color:#fff;padding:60px;text-align:center;margin-top:60px}
+/* ENTREGA */
+.entrega{
+background:#0f766e;
+color:#fff;
+padding:60px;
+border-radius:20px;
+margin-top:40px;
+text-align:center;
+}
+
+/* PROMO */
+.promo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:30px}
+.promo{padding:30px;border-radius:20px;color:#fff}
+.green{background:#0f766e}
+.red{background:#ef4444}
+
+/* DEPO */
+.depo{font-size:14px;color:#444}
+
+/* FOOTER */
+.footer{background:#0f766e;color:#fff;padding:40px;margin-top:60px;text-align:center}
 
 /* WHATS */
-.whats{position:fixed;bottom:20px;right:20px;width:65px;height:65px;background:#25d366;border-radius:50%;display:flex;justify-content:center;align-items:center}
+.whats{
+position:fixed;
+bottom:20px;
+right:20px;
+width:65px;
+height:65px;
+background:#25d366;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
 
-/* RESPONSIVO */
+/* ANIMAÇÃO */
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:all .6s ease;
+}
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* MOBILE */
 @media(max-width:768px){
 .hero{flex-direction:column;text-align:center}
+.hero img{margin-top:20px;width:100%;max-width:300px}
+.nav{flex-direction:column;gap:10px}
+.nav div{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .cards{grid-template-columns:1fr}
+.promo-grid{grid-template-columns:1fr}
+.entrega{padding:30px}
 }
 </style>
 
@@ -56,57 +113,129 @@ body{background:#f8fafc;color:#1f2937}
 <!-- NAV -->
 
 <div class="nav container">
-<img src="logo.png" class="logo">
+<h2>farmácia <span style="color:#0f766e">tem</span></h2>
 <div>
 <a>Início</a>
 <a>Serviços</a>
+<a>Promoções</a>
 <a>Contato</a>
 </div>
 </div>
 
 <!-- HERO -->
 
-<div class="hero container">
+<div class="hero container reveal">
 <div class="hero-text">
-<h1>Sua saúde em primeiro lugar, <span>sempre.</span></h1>
-<p>Medicamentos de qualidade e entrega rápida.</p>
-<button onclick="window.location.href='https://wa.me/5588997428848'">
-Falar no WhatsApp
+
+<p style="color:#ef4444;font-weight:600;">CUIDADO QUE VOCÊ MERECE</p>
+
+<h1>
+Sua saúde em primeiro lugar,<br>
+<span>sempre.</span>
+</h1>
+
+<p>Medicamentos de qualidade, atendimento humanizado e os melhores preços da região.</p>
+
+<button class="btn btn-green" onclick="window.location.href='https://wa.me/5588997428848'">
+FALAR NO WHATSAPP
 </button>
-</div>
-<img src="logo.png" width="250">
+
+<button class="btn btn-outline">VER SERVIÇOS</button>
+
+<div class="badges">
+✔ Medicamentos originais • ✔ Entrega rápida • ✔ Promoções • ✔ Atendimento humanizado
 </div>
 
-<!-- SERVIÇOS -->
+</div>
 
-<div class="section container">
+<img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=800" style="width:320px;border-radius:20px;">
+
+</div>
+
+<!-- DIFERENCIAIS -->
+
+<div class="section container reveal">
 <h2>Por que escolher a Farmácia Tem?</h2>
 
 <div class="cards">
-<div class="card">💊 Medicamentos originais</div>
-<div class="card">🚚 Entrega rápida</div>
-<div class="card">👨‍⚕️ Atendimento humanizado</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1580281657527-47f249e52c06?q=80&w=400">
+💊 Medicamentos originais
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=400">
+🚚 Entrega rápida
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?q=80&w=400">
+👨‍⚕️ Atendimento humanizado
+</div>
+</div>
+</div>
+
+<!-- ENTREGA -->
+
+<div class="container reveal">
+<div class="entrega">
+<h2>Precisou? A gente leva até você!</h2>
+<p>Entrega rápida, segura e com todo cuidado que você merece.</p>
 </div>
 </div>
 
-<!-- FORM -->
+<!-- PROMO -->
 
-<div class="form">
-<h2>Avalie nosso atendimento</h2>
+<div class="section container reveal">
+<h2>Ofertas que cuidam de você</h2>
 
-<input placeholder="Nome do atendente">
-<select><option>Atendimento</option></select>
-<textarea placeholder="Comentário"></textarea>
-
-<button>Enviar</button>
-
+<div class="promo-grid">
+<div class="promo green">💊 Até 90% OFF em genéricos</div>
+<div class="promo red">🔥 Ofertas da semana</div>
+<div class="promo green">❤️ Cuide da sua saúde</div>
+</div>
 </div>
 
-<!-- CTA -->
+<!-- DEPOIMENTOS -->
 
-<div class="cta">
-<h2>Precisou? Fale com a gente no WhatsApp</h2>
+<div class="section container reveal">
+<h2>O que nossos clientes dizem</h2>
+
+<div class="cards">
+<div class="card depo">⭐⭐⭐⭐⭐<br>Atendimento excelente!</div>
+<div class="card depo">⭐⭐⭐⭐⭐<br>Entrega muito rápida.</div>
+<div class="card depo">⭐⭐⭐⭐⭐<br>Melhor farmácia da região.</div>
 </div>
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+<p>© 2024 Farmácia Tem</p>
+</div>
+
+<!-- WHATS -->
+
+<a href="https://wa.me/5588997428848" class="whats">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="30">
+</a>
+
+<script>
+function reveal(){
+const elements = document.querySelectorAll('.reveal');
+
+elements.forEach(el=>{
+const windowHeight = window.innerHeight;
+const elementTop = el.getBoundingClientRect().top;
+
+if(elementTop < windowHeight - 100){
+el.classList.add('active');
+}
+});
+}
+
+window.addEventListener('scroll', reveal);
+</script>
 
 </body>
 </html>

@@ -1,147 +1,64 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Farmácia Tem</title>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-body{background:#f8f9fa;color:#222}
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#f8fafc;color:#1f2937}
+.container{max-width:1200px;margin:auto;padding:0 20px}
 
 /* NAV */
-.nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:#fff;
-}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;background:#fff}
 .logo{height:50px}
-.nav a{text-decoration:none;color:#333;margin-left:20px}
+.nav a{text-decoration:none;color:#374151;margin-left:20px;font-weight:500}
+.nav a:hover{color:#0f766e}
 
 /* HERO */
-.hero{
-padding:100px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-}
-.hero-text{max-width:500px}
-.hero h1{font-size:48px}
-.hero span{color:#1abc9c}
-.hero p{margin:20px 0;color:#555}
-.hero button{
-padding:14px 22px;
-background:#1abc9c;
-border:none;
-color:#fff;
-border-radius:8px;
-}
-.hero img{width:260px}
+.hero{background:linear-gradient(to right,#ecfeff,#fff);padding:80px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.hero-text{max-width:550px}
+.hero h1{font-size:48px;line-height:1.2}
+.hero span{color:#0f766e}
+.hero p{margin:20px 0;color:#6b7280}
+.hero button{padding:14px 24px;background:#0f766e;border:none;color:#fff;border-radius:12px;font-weight:600;cursor:pointer}
+.hero img{width:300px;border-radius:50%;border:4px solid #ef4444}
 
 /* SECTION */
-.section{padding:80px 40px}
-.cards{display:flex;gap:20px;flex-wrap:wrap}
-.card{
-background:#fff;
-padding:25px;
-border-radius:12px;
-width:260px;
-box-shadow:0 10px 20px rgba(0,0,0,.05);
-}
+.section{padding:80px 0}
+.section h2{text-align:center;margin-bottom:30px;font-size:32px}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.05)}
 
 /* FORM */
-.form{
-background:#fff;
-padding:30px;
-border-radius:15px;
-max-width:420px;
-margin:auto;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.form input,.form select,.form textarea{
-width:100%;
-padding:14px;
-margin-bottom:10px;
-border-radius:10px;
-border:1px solid #ddd;
-}
+.form{background:#fff;padding:30px;border-radius:20px;max-width:450px;margin:auto;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.form input,.form select,.form textarea{width:100%;padding:14px;margin-bottom:12px;border-radius:10px;border:1px solid #e5e7eb}
+.form button{width:100%;padding:14px;background:#ef4444;border:none;color:#fff;border-radius:10px;font-weight:600}
 
 /* STARS */
-.stars{text-align:center;font-size:26px}
-.star{cursor:pointer;color:#ccc}
-
-/* BOTÃO */
-.form button{
-width:100%;
-padding:14px;
-background:#e53935;
-border:none;
-color:#fff;
-border-radius:10px;
-}
+.stars{text-align:center;font-size:28px;margin-bottom:10px}
+.star{cursor:pointer;color:#d1d5db}
 
 /* FEEDBACK */
-.feedback{
-background:#f2f2f2;
-padding:10px;
-border-radius:10px;
-margin-top:10px;
-}
+.feedback{background:#f3f4f6;padding:12px;border-radius:10px;margin-top:10px}
 
 /* CTA */
-.cta{
-background:#1abc9c;
-color:#fff;
-padding:60px;
-text-align:center;
-}
+.cta{background:#0f766e;color:#fff;padding:60px 20px;text-align:center;border-radius:20px;max-width:1000px;margin:60px auto}
 
 /* WHATS */
-.whats{
-position:fixed;
-bottom:20px;
-right:20px;
-width:65px;
-height:65px;
-background:#25d366;
-border-radius:50%;
-display:flex;
-justify-content:center;
-align-items:center;
-animation:pulse 1.5s infinite;
-}
+.whats{position:fixed;bottom:20px;right:20px;width:65px;height:65px;background:#25d366;border-radius:50%;display:flex;justify-content:center;align-items:center;animation:pulse 1.5s infinite}
 .whats img{width:30px}
-
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.1)}
-100%{transform:scale(1)}
-}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
 
 /* OVERLAY */
-.overlay{
-position:fixed;
-inset:0;
-background:#fff;
-display:none;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:999;
-}
-.loader{
-width:60px;
-height:60px;
-border:6px solid #eee;
-border-top:6px solid #1abc9c;
-border-radius:50%;
-animation:spin 1s linear infinite;
-}
+.overlay{position:fixed;inset:0;background:#fff;display:none;justify-content:center;align-items:center;flex-direction:column;z-index:999}
+.loader{width:60px;height:60px;border:6px solid #eee;border-top:6px solid #0f766e;border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 @media(max-width:768px){
@@ -149,12 +66,14 @@ animation:spin 1s linear infinite;
 .hero img{margin-top:30px}
 }
 </style>
+
 </head>
 
 <body>
 
 <!-- NAV -->
-<div class="nav">
+
+<div class="nav container">
 <img src="logo.png" class="logo">
 <div>
 <a href="#">Início</a>
@@ -164,19 +83,24 @@ animation:spin 1s linear infinite;
 </div>
 
 <!-- HERO -->
+
 <div class="hero">
-<div class="hero-text">
+<div class="container hero-text">
 <h1>Sua saúde é nossa <span>prioridade</span></h1>
 <p>Atendimento de qualidade e entrega rápida.</p>
 <button onclick="window.location.href='https://wa.me/5588997428848'">
 Falar no WhatsApp
 </button>
 </div>
+
+<div class="container">
 <img src="logo.png">
+</div>
 </div>
 
 <!-- SERVIÇOS -->
-<div class="section">
+
+<div class="section container">
 <h2>Serviços</h2>
 <div class="cards">
 <div class="card">💊 Medicamentos confiáveis</div>
@@ -186,11 +110,11 @@ Falar no WhatsApp
 </div>
 
 <!-- AVALIAÇÃO -->
-<div class="section">
+
+<div class="section container">
 <h2>Avalie nosso atendimento</h2>
 
 <div class="form">
-
 <input id="atendente" placeholder="Nome do atendente">
 
 <select id="atendimento">
@@ -219,34 +143,34 @@ Falar no WhatsApp
 <h3>Feedback (<span id="total">0</span>)</h3>
 <div id="lista">Carregando...</div>
 </div>
-
 </div>
 
 <!-- CTA -->
+
 <div class="cta">
 <h2>Precisa de ajuda?</h2>
 <p>Fale conosco no WhatsApp</p>
 </div>
 
 <!-- WHATS -->
+
 <a href="https://wa.me/5588997428848" class="whats">
 <img src="whatsapp.png">
 </a>
 
 <!-- LOADING -->
+
 <div class="overlay" id="overlay">
 <div class="loader"></div>
 <p>Enviando...</p>
 </div>
 
 <script>
-
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbx0TtRNqQYFQa_uUC7QwkWEURw31deDCIcbb6iaNzjAEcetpT3OYTOU9R8QxsyevjXZ/exec";
 const URL="https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
 
 let nota=0;
 
-/* estrelas */
 document.querySelectorAll(".star").forEach((s,i)=>{
 s.onclick=()=>{
 nota=i+1;
@@ -254,13 +178,8 @@ document.querySelectorAll(".star").forEach((e,j)=>e.style.color=j<nota?"gold":"#
 };
 });
 
-/* enviar */
 function enviar(){
-
-if(nota===0){
-alert("Escolha uma nota");
-return;
-}
+if(nota===0){alert("Escolha uma nota");return;}
 
 let ultimo=localStorage.getItem("tempo");
 let agora=Date.now();
@@ -287,7 +206,6 @@ setTimeout(()=>location.reload(),1500);
 });
 }
 
-/* feedback automático */
 async function carregar(){
 let res=await fetch(URL);
 let data=await res.json();
@@ -308,7 +226,6 @@ ${f.Comentario||""}
 
 setInterval(carregar,5000);
 carregar();
-
 </script>
 
 </body>

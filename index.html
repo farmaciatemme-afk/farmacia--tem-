@@ -6,145 +6,79 @@
 <title>Farmácia Tem</title>
 
 <style>
-
-:root{
-  --verde:#1abc9c;
-  --verde2:#16a085;
-  --vermelho:#e53935;
-}
-
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  margin:0;
   font-family:Arial;
-  background:#f5f7fa;
-}
-
-/* TOPO */
-.topo{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 25px;
-  background:white;
-  box-shadow:0 2px 10px rgba(0,0,0,.05);
-}
-
-.logo-topo{width:130px;}
-
-nav a{
-  margin:0 12px;
-  text-decoration:none;
-  color:#333;
-  font-weight:bold;
-}
-
-.btn-whats{
-  background:#25d366;
-  color:white;
-  padding:10px 16px;
-  border-radius:12px;
-}
-
-/* HERO */
-.hero{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:50px;
-  background:linear-gradient(135deg,var(--verde),var(--verde2));
-  color:white;
-}
-
-.hero-texto{
-  max-width:500px;
-}
-
-.hero-texto span{
-  color:#ffdede;
-  font-weight:bold;
-}
-
-.hero-texto h1{
-  font-size:42px;
-  margin:10px 0;
-}
-
-.hero-logo img{
-  width:320px;
-  border-radius:50%;
-  border:6px solid white;
-}
-
-/* BOTÕES */
-.btn{
-  background:#25d366;
-  padding:12px 18px;
-  border-radius:12px;
-  color:white;
-  text-decoration:none;
-  display:inline-block;
-}
-
-.btn-outline{
-  border:2px solid white;
-  padding:10px 15px;
-  border-radius:12px;
-  margin-left:10px;
-  color:white;
-  text-decoration:none;
-}
-
-/* CARDS */
-.vantagens{
+  background:linear-gradient(135deg,#1abc9c,#16a085);
   display:flex;
   justify-content:center;
-  gap:20px;
-  padding:40px;
 }
 
-.card-vantagem{
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  width:230px;
-  text-align:center;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
-
-/* FORM */
+/* CONTAINER */
 .container{
-  max-width:450px;
-  margin:30px auto;
+  width:100%;
+  max-width:420px;
+  padding:20px;
 }
 
+/* CARD */
 .card{
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  background:#fff;
+  border-radius:25px;
+  padding:22px;
+  margin-top:20px;
+  box-shadow:0 15px 35px rgba(0,0,0,.2);
+  animation:fade 0.5s ease;
 }
 
-.field{margin:12px 0;}
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+
+/* LOGO */
+.logo{
+  width:120px;
+  display:block;
+  margin:0 auto 10px;
+  animation:float 2.5s infinite ease-in-out;
+}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
+}
+
+/* TITULO */
+h2{text-align:center;margin-bottom:5px}
+p{text-align:center;color:#666;margin-bottom:15px}
+
+/* CAMPOS */
+.field{margin:12px 0}
 
 .field input,
 .field select,
 .field textarea{
   width:100%;
-  padding:16px;
+  padding:15px;
   border-radius:14px;
   border:1px solid #ddd;
+  font-size:15px;
 }
 
 /* ESTRELAS */
 .stars{
   text-align:center;
   font-size:30px;
+  margin:10px 0;
 }
+
 .star{
   color:#ccc;
   cursor:pointer;
+  transition:.2s;
 }
 
 /* BOTÃO */
@@ -153,17 +87,25 @@ nav a{
   padding:16px;
   border:none;
   border-radius:14px;
-  background:var(--vermelho);
-  color:white;
+  background:#e53935;
+  color:#fff;
   font-weight:bold;
+  font-size:16px;
+  margin-top:10px;
+  transition:.3s;
+}
+
+.big-btn:hover{
+  transform:scale(1.03);
 }
 
 /* FEEDBACK */
 .feedback{
-  background:#f1f1f1;
-  padding:10px;
-  border-radius:10px;
+  background:#f4f4f4;
+  padding:12px;
+  border-radius:12px;
   margin-top:10px;
+  font-size:14px;
 }
 
 /* WHATS */
@@ -178,9 +120,9 @@ nav a{
   display:flex;
   justify-content:center;
   align-items:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.3);
   animation:pulse 1.4s infinite;
 }
-.whats img{width:34px;}
 
 @keyframes pulse{
   0%{transform:scale(1)}
@@ -188,89 +130,45 @@ nav a{
   100%{transform:scale(1)}
 }
 
-/* LOADING */
+.whats img{width:35px}
+
+/* OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
-  background:white;
+  background:#fff;
   display:none;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
+  z-index:999;
 }
 
 .loader{
   width:60px;
   height:60px;
   border:6px solid #eee;
-  border-top:6px solid var(--verde);
+  border-top:6px solid #1abc9c;
   border-radius:50%;
   animation:spin 1s linear infinite;
 }
 
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* MOBILE */
-@media(max-width:768px){
-.hero{
-  flex-direction:column;
-  text-align:center;
+@keyframes spin{
+  to{transform:rotate(360deg)}
 }
-.hero-logo img{
-  width:200px;
-  margin-top:20px;
-}
-.vantagens{
-  flex-direction:column;
-  align-items:center;
-}
-}
-
 </style>
 </head>
 
 <body>
 
-<header class="topo">
-<img src="logo.png" class="logo-topo">
-
-<nav>
-<a>Início</a>
-<a>Serviços</a>
-<a>Promoções</a>
-<a>Contato</a>
-</nav>
-
-<a href="https://wa.me/5588997428848" class="btn-whats">WhatsApp</a>
-</header>
-
-<section class="hero">
-
-<div class="hero-texto">
-<span>CUIDADO QUE VOCÊ MERECE</span>
-<h1>Sua saúde em primeiro lugar</h1>
-<p>Atendimento humanizado e preços acessíveis</p>
-
-<a href="https://wa.me/5588997428848" class="btn">Falar no WhatsApp</a>
-<a class="btn-outline">Ver serviços</a>
-</div>
-
-<div class="hero-logo">
-<img src="logo.png">
-</div>
-
-</section>
-
-<section class="vantagens">
-<div class="card-vantagem">Qualidade Garantida</div>
-<div class="card-vantagem">Entrega Rápida</div>
-<div class="card-vantagem">Promoções Diárias</div>
-</section>
-
 <div class="container">
 
 <div class="card">
-<h2>Avaliação</h2>
+
+<img src="logo.png" class="logo">
+
+<h2>Farmácia Tem</h2>
+<p>Avalie nosso atendimento</p>
 
 <div class="field">
 <input id="atendente" placeholder="Nome do atendente">
@@ -286,6 +184,27 @@ nav a{
 </select>
 </div>
 
+<div class="field">
+<select id="encontrou">
+<option value="">Encontrou?</option>
+<option>Sim</option>
+<option>Não</option>
+</select>
+</div>
+
+<div class="field">
+<input id="produto" placeholder="Produto">
+</div>
+
+<div class="field">
+<select id="voltaria">
+<option value="">Voltaria?</option>
+<option>Sim</option>
+<option>Talvez</option>
+<option>Não</option>
+</select>
+</div>
+
 <div class="stars">
 <span class="star">★</span>
 <span class="star">★</span>
@@ -294,30 +213,34 @@ nav a{
 <span class="star">★</span>
 </div>
 
-<button class="big-btn" onclick="enviar()">Enviar</button>
+<div class="field">
+<textarea id="comentario" placeholder="Sugestões"></textarea>
+</div>
+
+<button class="big-btn" onclick="enviar()">Enviar avaliação</button>
+
 </div>
 
 <div class="card">
 <h3>Feedback (<span id="total">0</span>)</h3>
-<div id="lista"></div>
+<div id="lista">Carregando...</div>
 </div>
 
 </div>
 
-<a href="https://wa.me/5588997428848" class="whats">
+<a href="https://wa.me/5588997428848" class="whats" target="_blank">
 <img src="whatsapp.png">
 </a>
 
 <div class="overlay" id="overlay">
 <div class="loader"></div>
-<p>Enviando...</p>
+<p style="margin-top:10px">Enviando...</p>
 </div>
 
 <script>
 
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbx0TtRNqQYFQa_uUC7QwkWEURw31deDCIcbb6iaNzjAEcetpT3OYTOU9R8QxsyevjXZ/exec";
-const GOOGLE_REVIEW="https://g.page/r/Cewsxt13lIojEAE/review";
-const URL="https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1";
+const GOOGLE="https://g.page/r/Cewsxt13lIojEAE/review";
 
 let nota=0;
 
@@ -330,37 +253,60 @@ document.querySelectorAll(".star").forEach((s,i)=>{
 
 function enviar(){
 
+if(!atendente.value || !atendimento.value || !encontrou.value || !voltaria.value || nota===0){
+  alert("Preencha tudo!");
+  return;
+}
+
 let ultimo=localStorage.getItem("tempo");
 let agora=Date.now();
 
 if(ultimo && agora-ultimo<600000){
-alert("Espere 10 minutos para avaliar novamente");
-return;
+  alert("Aguarde 10 minutos");
+  return;
 }
 
 overlay.style.display="flex";
 
 fetch(SCRIPT_URL,{
-method:"POST",
-body:JSON.stringify({nota:nota})
+  method:"POST",
+  body:JSON.stringify({
+    atendente:atendente.value,
+    atendimento:atendimento.value,
+    encontrou:encontrou.value,
+    produto:produto.value,
+    voltaria:voltaria.value,
+    nota:nota,
+    comentario:comentario.value
+  })
 })
 .then(()=>{
-localStorage.setItem("tempo",agora);
-setTimeout(()=>window.location.href=GOOGLE_REVIEW,1500);
+  localStorage.setItem("tempo",agora);
+  setTimeout(()=>{
+    window.location.href=GOOGLE;
+  },1500);
+})
+.catch(()=>{
+  alert("Erro");
 });
 }
 
 async function carregar(){
-let res=await fetch(URL);
-let data=await res.json();
+  let res=await fetch("https://opensheet.elk.sh/1m3oGfZpmDmqNetTjWFtbSMPdkdAYfQl6soJp1BXoKIA/Página1");
+  let data=await res.json();
 
-lista.innerHTML="";
-total.innerText=data.length;
+  lista.innerHTML="";
+  total.innerText=data.length;
 
-data.reverse().forEach(f=>{
-if(!f.Nota)return;
-lista.innerHTML+=`<div class="feedback">⭐ ${f.Nota}</div>`;
-});
+  data.reverse().forEach(f=>{
+    if(!f.Nota) return;
+
+    lista.innerHTML+=`
+    <div class="feedback">
+      ⭐ ${f.Nota}<br>
+      ${f.Comentario||""}
+    </div>`;
+  });
 }
 
 setInterval(carregar,5000);

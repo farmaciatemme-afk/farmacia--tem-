@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
@@ -30,11 +29,12 @@ align-items:center;
 padding:60px;
 background:linear-gradient(120deg,#e6f7f5 40%, #ffffff 100%);
 border-radius:20px;
-margin:40px;
+margin:20px;
 flex-wrap:wrap;
 }
+
 .hero-text{max-width:500px}
-.hero h1{font-size:56px;font-weight:700}
+.hero h1{font-size:48px;font-weight:700}
 .hero span{color:#0f766e}
 .hero p{margin:20px 0;color:#555;font-size:18px}
 
@@ -58,10 +58,15 @@ color:#fff;
 box-shadow:0 8px 20px rgba(15,118,110,0.3);
 }
 
-/* SECTION */
+/* SECTION (CORRIGIDO) */
 .section{
-padding:100px 40px;
+padding:60px 40px 40px;
 text-align:center;
+}
+
+.section h2{
+margin-bottom:20px;
+font-size:28px;
 }
 
 .cards{
@@ -69,7 +74,7 @@ display:flex;
 justify-content:center;
 gap:20px;
 flex-wrap:wrap;
-margin-top:30px;
+margin-top:20px;
 }
 
 .card{
@@ -78,6 +83,12 @@ background:#fff;
 padding:20px;
 border-radius:20px;
 box-shadow:0 15px 40px rgba(0,0,0,.06);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 20px 50px rgba(0,0,0,.1);
 }
 
 .card img{
@@ -90,8 +101,9 @@ margin-bottom:10px;
 .cta{
 background:#0f766e;
 color:#fff;
-padding:60px;
+padding:50px;
 text-align:center;
+margin-top:20px;
 }
 
 /* WHATS */
@@ -107,7 +119,9 @@ display:flex;
 justify-content:center;
 align-items:center;
 animation:pulse 1.5s infinite;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
+
 .whats img{width:30px}
 
 @keyframes pulse{
@@ -119,7 +133,8 @@ animation:pulse 1.5s infinite;
 /* RESPONSIVO */
 @media(max-width:768px){
 .hero{flex-direction:column;text-align:center}
-.hero-img{margin-top:30px}
+.hero-img{margin-top:30px;width:100%}
+.hero h1{font-size:32px}
 }
 </style>
 
@@ -128,7 +143,6 @@ animation:pulse 1.5s infinite;
 <body>
 
 <!-- NAV -->
-
 <div class="nav">
 <img src="logo.png" class="logo">
 <div>
@@ -139,7 +153,6 @@ animation:pulse 1.5s infinite;
 </div>
 
 <!-- HERO -->
-
 <div class="hero">
 <div class="hero-text">
 <h1>Sua saúde em primeiro lugar, <span>sempre</span>.</h1>
@@ -158,7 +171,6 @@ Falar no WhatsApp
 </div>
 
 <!-- SERVIÇOS -->
-
 <div class="section">
 <h2>Por que escolher a Farmácia Tem?</h2>
 
@@ -183,13 +195,15 @@ Falar no WhatsApp
 </div>
 
 <!-- CTA -->
-
 <div class="cta">
 <h2>Precisou? Fale com a gente no WhatsApp</h2>
+<br>
+<button class="btn" style="background:#fff;color:#0f766e;" onclick="window.location.href='https://wa.me/5588997428848'">
+Chamar agora
+</button>
 </div>
 
 <!-- WHATS -->
-
 <a href="https://wa.me/5588997428848" class="whats">
 <img src="whatsapp.png">
 </a>
